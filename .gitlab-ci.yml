@@ -24,8 +24,7 @@ lint-checks:
 
 # write the heroku-deployment job here
 heroku-deployment:
-    type: deploy
-    stage: production
+    stage: deploy
     script:
      - npm install --production
      - (echo "machine git.heroku.com"; echo " username shilpa.patwary13@gmail.com"; echo " password $HEROKU_PASSWORD") > ~/.netrc
