@@ -10,8 +10,8 @@ app.get('/api/notes', (req, res) => {
 });
 
 app.get('/api/notes/:id', (req, res) => {
-  const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10)); 
-  if (note.length === 0) res.status(404).send('Note not found!')
+  const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10));
+  if (note.length === 0) res.status(404).send('Note not found!');
   else {
     res.set('Content-Type', 'application/json');
     res.status(200).send(note);
@@ -26,6 +26,4 @@ app.post('/api/notes', (req, res) => {
   res.status(201).send(note);
 });
 
-app.listen(port, () => {
-  console.log('app started on', port);
-});
+app.listen(port, () => {});
