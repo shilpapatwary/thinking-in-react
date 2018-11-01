@@ -1,29 +1,22 @@
 const express = require('express');
-const notes = require('./notes.json');
+const morgan = require('morgan');
+const bodyparser = require('body-parser');
+
+const notesRouter = require('./routes/notes');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/api/notes', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.status(200).send(notes);
-});
+app.use(morgan('dev'));
+app.use(bodyparser.json());
 
-app.get('/api/notes/:id', (req, res) => {
-  const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10));
-  if (note.length === 0) res.status(404).send('Note not found!');
-  else {
-    res.set('Content-Type', 'application/json');
-    res.status(200).send(note);
-  }
+app.use('/api/notes', notesRouter);
+app.use((err, req, res, next) => {
+  if (err) res.set(500).send('Some error occured, Please try again later!');
+  next();
 });
-
-app.post('/api/notes', (req, res) => {
-  const note = req.body;
-  note.noteId = Math.random() * 3456543;
-  notes.push(note);
-  res.set('Content-Type', 'application/json');
-  res.status(201).send(note);
+app.use((req, res) => {
+  res.set(404).send('REQUEST NOT FOUND');
 });
 
 app.listen(port, () => {});
