@@ -19,6 +19,10 @@ Time: 4 hrs
 
 # Setup
 1. Start by forking this repository into your account.
+2. Add your 02-express-rest-api repository as a remote with the command: `git add remote 02-express-rest-api <insert-02-express-rest-api-repository-url-here>`
+3. Merge your 02-express-rest-api changes into the master branch with the command: `git merge 02-express-rest-api/master`. You will get a merge conflict in Readme.md file.
+4. Update the Readme.md file to these instructions, and remove the instructions from 02-express-rest-api.
+5. Commit the changes. You are now ready to start working on this programming task.
 
 # Submission
 1. After completing the exercise/assignment, create a git tag by typing the command `git tag submission`
