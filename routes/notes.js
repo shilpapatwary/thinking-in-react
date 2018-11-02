@@ -3,9 +3,13 @@ const express = require('express');
 const router = express.Router();
 const notes = require('../notes.json');
 
-router.get('/', (req, res) => {
-  res.set('Content-Type', 'application/json');
-  res.status(200).send(notes);
+router.get('/', (req, res, next) => {
+  try {
+    res.set('Content-Type', 'application/json');
+    res.status(200).send(notes);
+  } catch (e) {
+    next(e);
+  }
 });
 
 router.get('/:id', (req, res, next) => {
