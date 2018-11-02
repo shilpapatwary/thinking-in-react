@@ -1,26 +1,33 @@
-# Restful API's using Express.js
+# Assignment 3 & 4
 
-Create a Restful API for a Note taking application. You should be able to `Create`, `Read`, `Update` and `Delete` a particular note. Also, create one api to fetch all the Notes. 
+Time: 4 hrs
 
-1. Get all the notes. (It should also support sorting the notes by it's date of creation)
-2. Get a single note by it's ID.
-3. Create a new note.
-4. Update a existing note.
-5. Delete a existing note.
+# Statement For 3
+1. Create Login And Register Route.
+2. Write Passport MiddleWare to authenticate user
+3. Protect all the Other Routes. All the backend-routes can only be accessible only when the user is authenticated
 
-- Test your API's using Postman.
-- Send back proper Http status codes and error messages on invalid requests.
-- Write modular code with the help of Express router.
-- Create a middleware to validate the request body.
-- Error Handling should be in place.
-- Setup Eslint with Airbnb and resolve all lint errors and warnings.
+# Statement For 4
+1. Write unit test cases for your protected(authenticated) & unprotected routes using Mocha, Chai, Supertest
+1. Write Swagger documentation for your REST APIs.
+1. Follow a standard folder structure of your REST API code.
+1. Configure Gitlab-CI, such that, it runs test cases every push to master branch is deployed to heroku
 
-Make sure **Note** has atleast these 4 properties. 
- - noteId
- - noteTitle
- - noteDescription
- - createdAt
+# Prerequisites
+1. Ensure NodeJS, NPM and Git are installed
+1. Ensure a Text Editor is installed. Choose one of Sublime Text 3, Visual Studio Code, or Atom
 
-Feel free to add more properties to the Note object as per your requirements.
+# Setup
+1. Start by forking this repository into your account.
 
-CD should be configured and the API's should be deployed on Heroku.
+# Submission
+1. After completing the exercise/assignment, create a git tag by typing the command `git tag submission`
+2. Push your tag to the server by typing the command `git push origin submission`
+
+# Post Submission
+- A mentor will review your submission, and will open an issue with review comments.
+- You must resolve all the review comments, and re-submit the assignment, by following the steps in Submission
+
+# Completion
+- Submission does not mean that the assignment is complete
+- Expect 2-5 Iterations before the assignment is accepted as Complete by a mentor
