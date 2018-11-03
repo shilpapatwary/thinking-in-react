@@ -5,8 +5,15 @@ const notes = require('../notes.json');
 
 router.get('/', (req, res, next) => {
   try {
-    res.set('Content-Type', 'application/json');
-    res.status(200).send(notes);
+    if (req.query.sort_by === 'date') {
+      const sortedNotes = [...notes];
+      sortedNotes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      res.set('Content-Type', 'application/json');
+      res.status(200).send(sortedNotes);
+    } else {
+      res.set('Content-Type', 'application/json');
+      res.status(200).send(notes);
+    }
   } catch (e) {
     next(e);
   }

@@ -56,10 +56,10 @@ route.post('/', (req, res, next) => {
 
 route.delete('/:id', (req, res, next) => {
   try {
-    const boardIndex = req.params.id;
-    const board = boards.filter(b => b.id === boardIndex);
-    if (board.length === 0) res.set(404).send('Board ID Not Found');
+    const boardIndex = boards.findIndex(b => b.id === req.params.id, 10);
+    if (boardIndex === -1) res.status(404).send('Board not found');
     else {
+      const board = boards[boardIndex];
       boards.splice(boardIndex, 1);
       res.set('content-type', 'application/json');
       res.set(200).send(board);
@@ -88,7 +88,7 @@ route.post('/:id/lists', (req, res, next) => {
 });
 
 // Create a card at an index in a list in a Board
-route.post('/:bid/lists/:id', (req, res, next) => {
+route.post('/:bid/lists/:id/cards', (req, res, next) => {
   try {
     const card = req.body;
     card.id = `${Math.floor(Math.random() * 100000)}`;
