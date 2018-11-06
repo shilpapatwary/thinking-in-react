@@ -1,16 +1,22 @@
-# Assignment 3 & 4
+# Assignment - Week 2
 
 Time: 4 hrs
 
-# Statement For 3
-1. Create Login And Register Route.
+# Part 1
+The objective is to demonstrate implementation of Authentication and Authorization, and Routes Protection
+
+For the Trello Application:
+1. Create Login And Register Route
 2. Write Passport MiddleWare to authenticate user
 3. Protect all the Other Routes. All the backend-routes can only be accessible only when the user is authenticated
 
-# Statement For 4
+# Part 2
+The objective is to demonstrate the ability to write Unit Tests for the applications built so far
+
+For the Trello Application:
 1. Write unit test cases for your protected(authenticated) & unprotected routes using Mocha, Chai, Supertest
-1. Write Swagger documentation for your REST APIs.
-1. Follow a standard folder structure of your REST API code.
+1. Write Swagger documentation for your REST APIs
+1. Follow a standard folder structure of your REST API code
 1. Configure Gitlab-CI, such that, it runs test cases every push to master branch is deployed to heroku
 
 # Prerequisites
