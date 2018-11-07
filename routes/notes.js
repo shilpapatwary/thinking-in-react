@@ -1,9 +1,9 @@
 const express = require('express');
 
 const router = express.Router();
-const notes = require('../notes.json');
+const notes = require('../data/notes.json');
 
-router.get('/', (req, res, next) => {
+router.route('/').get((req, res, next) => {
   try {
     if (req.query.sort_by === 'date') {
       const sortedNotes = [...notes];
@@ -17,22 +17,7 @@ router.get('/', (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
-
-router.get('/:id', (req, res, next) => {
-  try {
-    const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10));
-    if (note.length === 0) res.status(404).send('Note not found!');
-    else {
-      res.set('Content-Type', 'application/json');
-      res.status(200).send(note);
-    }
-  } catch (e) {
-    next(e);
-  }
-});
-
-router.post('/', (req, res, next) => {
+}).post((req, res, next) => {
   try {
     const note = req.body;
     note.noteId = Math.floor(Math.random() * 100000);
@@ -44,7 +29,18 @@ router.post('/', (req, res, next) => {
   }
 });
 
-router.put('/:id', (req, res, next) => {
+router.route('/:id').get((req, res, next) => {
+  try {
+    const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10));
+    if (note.length === 0) res.status(404).send('Note not found!');
+    else {
+      res.set('Content-Type', 'application/json');
+      res.status(200).send(note);
+    }
+  } catch (e) {
+    next(e);
+  }
+}).put((req, res, next) => {
   try {
     const note = req.body;
     const noteIndex = notes.findIndex(n => n.noteId === parseInt(req.params.id, 10));
@@ -57,9 +53,7 @@ router.put('/:id', (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
-
-router.delete('/:id', (req, res, next) => {
+}).delete((req, res, next) => {
   try {
     const noteIndex = notes.findIndex(n => n.noteId === parseInt(req.params.id, 10));
     if (noteIndex === -1) res.status(404).send('Note Id not found');

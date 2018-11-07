@@ -2,7 +2,7 @@ const express = require('express');
 
 const route = express.Router();
 
-const workspaces = require('../workspace.json');
+const workspaces = require('../data/workspace.json');
 
 route.get('/', (req, res, next) => {
   try {

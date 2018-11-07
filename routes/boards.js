@@ -1,19 +1,29 @@
 const express = require('express');
 
-const route = express.Router();
+const router = express.Router();
 
-const boards = require('../boards.json');
+const boards = require('../data/boards.json');
 
-route.get('/', (req, res, next) => {
+router.route('/').get((req, res, next) => {
   try {
     res.set('content-type', 'application/json');
     res.set(200).send(boards);
   } catch (e) {
     next(e);
   }
+}).post((req, res, next) => {
+  try {
+    const board = req.body;
+    board.id = `${Math.floor(Math.random() * 100000)}`;
+    boards.push(board);
+    res.set('content-type', 'application/json');
+    res.set('201').send(board);
+  } catch (e) {
+    next(e);
+  }
 });
 
-route.get('/:id', (req, res, next) => {
+router.route('/:id').get((req, res, next) => {
   try {
     const board = boards.filter(b => b.id === req.params.id);
     if (board.length === 0) res.set(404).send('board ID not found!');
@@ -24,9 +34,7 @@ route.get('/:id', (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
-
-route.put('/:id', (req, res, next) => {
+}).put((req, res, next) => {
   try {
     const board = req.body;
     const boardIndex = boards.findIndex(b => b.id === req.params.id);
@@ -40,21 +48,7 @@ route.put('/:id', (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
-
-route.post('/', (req, res, next) => {
-  try {
-    const board = req.body;
-    board.id = `${Math.floor(Math.random() * 100000)}`;
-    boards.push(board);
-    res.set('content-type', 'application/json');
-    res.set('201').send(board);
-  } catch (e) {
-    next(e);
-  }
-});
-
-route.delete('/:id', (req, res, next) => {
+}).delete((req, res, next) => {
   try {
     const boardIndex = boards.findIndex(b => b.id === req.params.id, 10);
     if (boardIndex === -1) res.status(404).send('Board not found');
@@ -70,7 +64,7 @@ route.delete('/:id', (req, res, next) => {
 });
 
 // Create a list at an index in Board
-route.post('/:id/lists', (req, res, next) => {
+router.route('/:id/lists').post((req, res, next) => {
   try {
     const list = req.body;
     list.id = `${Math.floor(Math.random() * 100000)}`;
@@ -88,7 +82,7 @@ route.post('/:id/lists', (req, res, next) => {
 });
 
 // Create a card at an index in a list in a Board
-route.post('/:bid/lists/:id/cards', (req, res, next) => {
+router.route('/:bid/lists/:id/cards').post((req, res, next) => {
   try {
     const card = req.body;
     card.id = `${Math.floor(Math.random() * 100000)}`;
@@ -107,4 +101,4 @@ route.post('/:bid/lists/:id/cards', (req, res, next) => {
   }
 });
 
-module.exports = route;
+module.exports = router;
