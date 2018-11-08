@@ -23,3 +23,9 @@ lint-checks:
     - npm run lint
 
 # write the heroku-deployment job here
+heroku-deployment:
+    stage: deploy
+    script:
+     - npm install --production
+     - (echo "machine git.heroku.com"; echo " username shilpa.patwary13@gmail.com"; echo " password $HEROKU_PASSWORD") > ~/.netrc
+     - git push https://git.heroku.com/express-rest-api-31102018.git HEAD:master

@@ -1,0 +1,32 @@
+[
+    {
+        "noteId": 12345,
+        "noteTitle": "Sample Note",
+        "noteDescription": "Sample Note Description",
+        "createdAt": "10-28-2018"
+    },
+    {
+        "noteId": 23456,
+        "noteTitle": "Schedule",
+        "noteDescription": "Schedule decription",
+        "createdAt": "10-25-2018"
+    },
+    {
+        "noteId": 34567,
+        "noteTitle": "ExpressSession",
+        "noteDescription": "express description",
+        "createdAt": "10-27-2018"
+    },
+    {
+        "noteId": 45678,
+        "noteTitle": "NodeSession",
+        "noteDescription": "Node description",
+        "createdAt": "10-22-2018"
+    },
+    {
+        "noteId": 56789,
+        "noteTitle": "MongoSession",
+        "noteDescription": "Mongo Description",
+        "createdAt": "10-23-2018"
+    }
+]
