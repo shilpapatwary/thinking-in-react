@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 # Assignment - Week 2
 
 Time: 4 hrs
-=======
 Heroku path : https://express-rest-api-31102018.herokuapp.com/
 # Restful API's using Express.js
 
@@ -11,7 +9,6 @@ Heroku path : https://express-rest-api-31102018.herokuapp.com/
 The objective of Part 1 is to demonstrate Technical Capability using ExpressJS.
 
 Create a Restful API for a Note taking application. You should be able to `Create`, `Read`, `Update` and `Delete` a particular note. Also, create one api to fetch all the Notes. 
->>>>>>> 7524e02e01019a9f0601333f3ad3340a0040c36d
 
 # Part 1
 The objective is to demonstrate implementation of Authentication and Authorization, and Routes Protection
@@ -30,7 +27,6 @@ For the Trello Application:
 1. Follow a standard folder structure of your REST API code
 1. Configure Gitlab-CI, such that, it runs test cases every push to master branch is deployed to heroku
 
-<<<<<<< HEAD
 # Prerequisites
 1. Ensure NodeJS, NPM and Git are installed
 1. Ensure a Text Editor is installed. Choose one of Sublime Text 3, Visual Studio Code, or Atom
@@ -53,7 +49,6 @@ For the Trello Application:
 # Completion
 - Submission does not mean that the assignment is complete
 - Expect 2-5 Iterations before the assignment is accepted as Complete by a mentor
-=======
 CD should be configured and the API's should be deployed on Heroku.
 
 ## Part 2: Build RESTful APIs for Kanban Application (Reference: Trello <trello.com>)
@@ -121,4 +116,3 @@ You must resolve all the review comments, and re-submit the assignment, by creat
 
 Submission does not mean that the assignment is complete
 Expect 2-5 Iterations before the assignment is accepted as Complete by a mentor
->>>>>>> 7524e02e01019a9f0601333f3ad3340a0040c36d
