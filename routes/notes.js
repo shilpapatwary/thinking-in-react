@@ -1,9 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
 const notes = require('../data/notes.json');
+const passport = require('../authenticate');
 
-router.route('/').get((req, res, next) => {
+router.route('/').get(passport.authenticate('local'), (req, res, next) => {
   try {
     if (req.query.sort_by === 'date') {
       const sortedNotes = [...notes];
