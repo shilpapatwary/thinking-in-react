@@ -14,6 +14,7 @@ passport.use(new Local((uname, password, done) => {
 }));
 
 passport.serializeUser((usr, done) => {
+  /* eslint no-underscore-dangle: 0 */
   done(null, usr._id);
 });
 
