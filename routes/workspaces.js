@@ -1,32 +1,30 @@
 const express = require('express');
 
-const route = express.Router();
+const router = express.Router();
 
 const workspaces = require('../data/workspace.json');
+const isLoggedin = require('../userAuthentication');
 
-route.get('/', (req, res, next) => {
+router.route('/').get(isLoggedin, (req, res, next) => {
   try {
     res.set('content-type', 'application/json');
     res.set(200).send(workspaces);
   } catch (e) {
     next(e);
   }
-});
-
-route.get('/:id', (req, res, next) => {
+}).post(isLoggedin, (req, res, next) => {
   try {
-    const workspace = workspaces.filter(b => b.id === req.params.id);
-    if (workspace.length === 0) res.set(404).send('workspace ID not found!');
-    else {
-      res.set('content-type', 'application/json');
-      res.set(200).send(workspace);
-    }
+    const workspace = req.body;
+    workspace.id = `${Math.floor(Math.random() * 100000)}`;
+    workspaces.push(workspace);
+    res.set('content-type', 'application/json');
+    res.set('201').send(workspace);
   } catch (e) {
     next(e);
   }
 });
 
-route.put('/:id', (req, res, next) => {
+router.route('/:id').put(isLoggedin, (req, res, next) => {
   try {
     const workspace = req.body;
     const workspaceIndex = workspaces.findIndex(b => b.id === req.params.id);
@@ -40,21 +38,7 @@ route.put('/:id', (req, res, next) => {
   } catch (e) {
     next(e);
   }
-});
-
-route.post('/', (req, res, next) => {
-  try {
-    const workspace = req.body;
-    workspace.id = `${Math.floor(Math.random() * 100000)}`;
-    workspaces.push(workspace);
-    res.set('content-type', 'application/json');
-    res.set('201').send(workspace);
-  } catch (e) {
-    next(e);
-  }
-});
-
-route.delete('/:id', (req, res, next) => {
+}).delete(isLoggedin, (req, res, next) => {
   try {
     const workspaceIndex = workspaces.findIndex(w => w.id === req.params.id, 10);
     if (workspaceIndex === -1) res.status(404).send('Workspace not found');
@@ -67,10 +51,21 @@ route.delete('/:id', (req, res, next) => {
   } catch (e) {
     next(e);
   }
+}).get(isLoggedin, (req, res, next) => {
+  try {
+    const workspace = workspaces.filter(b => b.id === req.params.id);
+    if (workspace.length === 0) res.set(404).send('workspace ID not found!');
+    else {
+      res.set('content-type', 'application/json');
+      res.set(200).send(workspace);
+    }
+  } catch (e) {
+    next(e);
+  }
 });
 
 // Add users to workspace
-route.post('/:id/users', (req, res, next) => {
+router.route('/:id/users').post(isLoggedin, (req, res, next) => {
   try {
     const user = req.body;
     user.id = `${Math.floor(Math.random() * 100000)}`;
@@ -88,7 +83,7 @@ route.post('/:id/users', (req, res, next) => {
 });
 
 // Create channel in workspace
-route.post('/:id/channels', (req, res, next) => {
+router.route('/:id/channels').post(isLoggedin, (req, res, next) => {
   try {
     const channel = req.body;
     channel.id = `${Math.floor(Math.random() * 100000)}`;
@@ -106,7 +101,7 @@ route.post('/:id/channels', (req, res, next) => {
 });
 
 // Add users to channels in workspace
-route.post('/:wid/channels/:cid/users', (req, res, next) => {
+router.route('/:wid/channels/:cid/users').post(isLoggedin, (req, res, next) => {
   try {
     const user = req.body;
     user.id = `${Math.floor(Math.random() * 100000)}`;
@@ -126,7 +121,7 @@ route.post('/:wid/channels/:cid/users', (req, res, next) => {
 });
 
 // List Users in a channel
-route.get('/:wid/channels/:cid/users', (req, res, next) => {
+router.route('/:wid/channels/:cid/users').get(isLoggedin, (req, res, next) => {
   try {
     const workspaceId = req.params.wid;
     const workspaceIndex = workspaces.findIndex(w => w.id === workspaceId);
@@ -134,7 +129,6 @@ route.get('/:wid/channels/:cid/users', (req, res, next) => {
     else {
       const cIndex = workspaces[workspaceIndex].channels.findIndex(c => c.id === req.params.cid);
       const channel = workspaces[workspaceIndex].channels[cIndex];
-      console.log(channel);
       res.set('content-type', 'application/json');
       res.set(200).send(channel.users);
     }
@@ -143,4 +137,4 @@ route.get('/:wid/channels/:cid/users', (req, res, next) => {
   }
 });
 
-module.exports = route;
+module.exports = router;

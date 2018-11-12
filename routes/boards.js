@@ -1,17 +1,17 @@
 const express = require('express');
+const boards = require('../data/boards.json');
+const isLoggedin = require('../userAuthentication');
 
 const router = express.Router();
 
-const boards = require('../data/boards.json');
-
-router.route('/').get((req, res, next) => {
+router.route('/').get(isLoggedin, (req, res, next) => {
   try {
     res.set('content-type', 'application/json');
     res.set(200).send(boards);
   } catch (e) {
     next(e);
   }
-}).post((req, res, next) => {
+}).post(isLoggedin, (req, res, next) => {
   try {
     const board = req.body;
     board.id = `${Math.floor(Math.random() * 100000)}`;
@@ -23,7 +23,7 @@ router.route('/').get((req, res, next) => {
   }
 });
 
-router.route('/:id').get((req, res, next) => {
+router.route('/:id').get(isLoggedin, (req, res, next) => {
   try {
     const board = boards.filter(b => b.id === req.params.id);
     if (board.length === 0) res.set(404).send('board ID not found!');
@@ -34,7 +34,7 @@ router.route('/:id').get((req, res, next) => {
   } catch (e) {
     next(e);
   }
-}).put((req, res, next) => {
+}).put(isLoggedin, (req, res, next) => {
   try {
     const board = req.body;
     const boardIndex = boards.findIndex(b => b.id === req.params.id);
@@ -48,7 +48,7 @@ router.route('/:id').get((req, res, next) => {
   } catch (e) {
     next(e);
   }
-}).delete((req, res, next) => {
+}).delete(isLoggedin, (req, res, next) => {
   try {
     const boardIndex = boards.findIndex(b => b.id === req.params.id, 10);
     if (boardIndex === -1) res.status(404).send('Board not found');
@@ -64,7 +64,7 @@ router.route('/:id').get((req, res, next) => {
 });
 
 // Create a list at an index in Board
-router.route('/:id/lists').post((req, res, next) => {
+router.route('/:id/lists').post(isLoggedin, (req, res, next) => {
   try {
     const list = req.body;
     list.id = `${Math.floor(Math.random() * 100000)}`;
@@ -82,7 +82,7 @@ router.route('/:id/lists').post((req, res, next) => {
 });
 
 // Create a card at an index in a list in a Board
-router.route('/:bid/lists/:id/cards').post((req, res, next) => {
+router.route('/:bid/lists/:id/cards').post(isLoggedin, (req, res, next) => {
   try {
     const card = req.body;
     card.id = `${Math.floor(Math.random() * 100000)}`;

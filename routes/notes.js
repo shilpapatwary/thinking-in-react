@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
 const notes = require('../data/notes.json');
-const passport = require('../authenticate');
+const isLoggedin = require('../userAuthentication');
 
-router.route('/').get(passport.authenticate('local'), (req, res, next) => {
+const router = express.Router();
+
+router.route('/').get(isLoggedin, (req, res, next) => {
   try {
     if (req.query.sort_by === 'date') {
       const sortedNotes = [...notes];
@@ -15,9 +16,10 @@ router.route('/').get(passport.authenticate('local'), (req, res, next) => {
       res.status(200).send(notes);
     }
   } catch (e) {
+    console.log(e);
     next(e);
   }
-}).post((req, res, next) => {
+}).post(isLoggedin, (req, res, next) => {
   try {
     const note = req.body;
     note.noteId = Math.floor(Math.random() * 100000);
@@ -29,7 +31,7 @@ router.route('/').get(passport.authenticate('local'), (req, res, next) => {
   }
 });
 
-router.route('/:id').get((req, res, next) => {
+router.route('/:id').get(isLoggedin, (req, res, next) => {
   try {
     const note = notes.filter(n => n.noteId === parseInt(req.params.id, 10));
     if (note.length === 0) res.status(404).send('Note not found!');
@@ -40,7 +42,7 @@ router.route('/:id').get((req, res, next) => {
   } catch (e) {
     next(e);
   }
-}).put((req, res, next) => {
+}).put(isLoggedin, (req, res, next) => {
   try {
     const note = req.body;
     const noteIndex = notes.findIndex(n => n.noteId === parseInt(req.params.id, 10));
@@ -53,7 +55,7 @@ router.route('/:id').get((req, res, next) => {
   } catch (e) {
     next(e);
   }
-}).delete((req, res, next) => {
+}).delete(isLoggedin, (req, res, next) => {
   try {
     const noteIndex = notes.findIndex(n => n.noteId === parseInt(req.params.id, 10));
     if (noteIndex === -1) res.status(404).send('Note Id not found');

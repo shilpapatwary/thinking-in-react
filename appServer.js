@@ -24,6 +24,17 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+function isLoggedin(req, res, next) {
+  console.log(req.isAuthenticated(), 'It should come true, after logging in ..!!!')
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401).send({ message: 'UnAuthorised' });
+  }
+}
+
 app.use('/api/user', userRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/boards', boardsRouter);
