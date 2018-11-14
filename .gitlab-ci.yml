@@ -9,6 +9,13 @@ cache:
   paths:
     - node_modules/
 
+services:
+  - mongo:latest
+
+variables:
+  MONGO_URI: 'mongodb://mongo/passportdb'
+  NODE_ENV: 'test'
+
 install-dependencies:
   stage: build
   script: 
@@ -22,4 +29,15 @@ lint-checks:
   script: 
     - npm run lint
 
+unit-tests:
+  stage: test
+  script:
+    - npm run test
+
 # write the heroku-deployment job here
+heroku-deployment:
+    stage: deploy
+    script:
+     - npm install --production
+     - (echo "machine git.heroku.com"; echo " username shilpa.patwary13@gmail.com"; echo " password $HEROKU_PASSWORD") > ~/.netrc
+     - git push https://git.heroku.com/passport-mocha-12112018.git HEAD:master
