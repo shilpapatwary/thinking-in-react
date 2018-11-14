@@ -153,5 +153,3 @@ paths:
           description: OK
         '405':
           description: Invalid input
-      
-      
