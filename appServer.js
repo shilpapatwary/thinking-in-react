@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
+const jsonServer = require('json-server');
+const path = require('path');
 
 require('./config/dbConnection');
 
@@ -14,6 +16,12 @@ const passport = require('./authenticate');
 const app = express();
 const port = process.env.PORT || 3000;
 
+const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'boards.json'));
+const jsonMiddlewares = jsonServer.defaults();
+
+app.use('/api/', jsonRoutes);
+app.use('/api/', jsonMiddlewares);
+
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({
   extended: true,
@@ -24,7 +32,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/user', userRouter);
+app.use('/auth', userRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/boards', boardsRouter);
 app.use('/api/workspaces', workspacesRouter);

@@ -8,7 +8,7 @@ let userCookie;
 const should = chai.should();
 function loginUser() {
   return request(app)
-    .post('/api/user/login')
+    .post('/auth/login')
     .type('form')
     .send({
       username: 'shilpa',
