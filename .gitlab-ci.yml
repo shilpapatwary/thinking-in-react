@@ -10,7 +10,7 @@ cache:
     - node_modules/
 
 services:
-  - mongo
+  - mongo:latest
 
 variables:
   MONGO_URI: 'mongodb://mongo/passportdb'

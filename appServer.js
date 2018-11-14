@@ -19,8 +19,8 @@ const port = process.env.PORT || 3000;
 const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'boards.json'));
 const jsonMiddlewares = jsonServer.defaults();
 
-app.use('/api/', jsonRoutes);
-app.use('/api/', jsonMiddlewares);
+app.use('/api/docs/', jsonRoutes);
+app.use('/api/docs/', jsonMiddlewares);
 
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({

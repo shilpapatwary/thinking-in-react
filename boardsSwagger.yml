@@ -1,15 +1,25 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  description: >-
-    App that mimics trello application    
-  version: 1.0.0
   title: Trello Application
+  description: App that mimics trello
+  version: '0.1'
 servers: 
   - url: http://localhost:3000/api/
-tags:
+    description: local dev
+  - url: https://passport-mocha-12112018.herokuapp.com/api/
+    description: heroku app
+tags: 
   - name: Boards
   - name: Lists
   - name: Cards
+components:
+  securitySchemes:
+    cookieAuth:       
+      type: apiKey
+      in: cookie
+      name: connect.sid
+security:
+  - cookieAuth: []
 paths:
   /boards:
     post:
@@ -37,6 +47,17 @@ paths:
       responses:
         '200':
           description: successful operation
+          content:
+            application/json:
+              schema:
+                 $ref: "boards.json"
+              example:
+                  id: 12345
+                  name: "board1"
+                  closed: false
+                  pinned: false
+                  lists: []
+              
       
   /boards/{id}:
     get:
@@ -153,3 +174,5 @@ paths:
           description: OK
         '405':
           description: Invalid input
+      
+      
