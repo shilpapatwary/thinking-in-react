@@ -1,63 +1,71 @@
-
-const boards = require('../data/boards.json');
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
+const path = require('path');
+const Boards = require('../model/boardModel');
 
 const boardsController = {
   getAllBoards: (req, res, next) => {
     try {
-      res.set('content-type', 'application/json');
-      res.set(200).send(boards);
+      Boards.find((err, response) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'application/json');
+        res.status(200).send(response);
+      });
     } catch (e) {
       next(e);
     }
   },
   getBoard: (req, res, next) => {
     try {
-      const board = boards.filter(b => b.id === req.params.id);
-      if (board.length === 0) res.set(404).send('board ID not found!');
-      else {
-        res.set('content-type', 'application/json');
-        res.set(200).send(board);
-      }
+      Boards.findOne({ id: req.params.id }, (err, response) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'application/json');
+        // res.status(200).send(response);
+        res.render('lists.html');
+      });
     } catch (e) {
       next(e);
     }
   },
   updateBoard: (req, res, next) => {
     try {
-      const board = req.body;
-      const boardIndex = boards.findIndex(b => b.id === req.params.id);
-      if (boardIndex === -1) {
-        res.set(404).send('Board ID not found');
-      } else {
-        boards[boardIndex] = board;
-        res.set('content-type', 'application/json');
-        res.set(202).send(board);
-      }
+      const options = { new: true };
+      const update = { $set: req.body };
+      Boards.findOneAndUpdate({ id: req.params.id }, update, options, (err, board) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'application/json');
+        res.status(202).send(board);
+      });
     } catch (e) {
+      console.log(e);
       next(e);
     }
   },
   deleteBoard: (req, res, next) => {
     try {
-      const boardIndex = boards.findIndex(b => b.id === req.params.id, 10);
-      if (boardIndex === -1) res.status(404).send('Board not found');
-      else {
-        const board = boards[boardIndex];
-        boards.splice(boardIndex, 1);
-        res.set('content-type', 'application/json');
+      Boards.findOneAndDelete({ id: req.params.id }, (err, board) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'application/json');
         res.set(200).send(board);
-      }
+      });
     } catch (e) {
       next(e);
     }
   },
   createBoard: (req, res, next) => {
     try {
-      const board = req.body;
-      board.id = `${Math.floor(Math.random() * 100000)}`;
-      boards.push(board);
-      res.set('content-type', 'application/json');
-      res.set('201').send(board);
+      const board = new Boards({
+        id: req.body.id,
+        name: req.body.name,
+        lists: req.body.lists,
+      });
+      board.save((err) => {
+        if (err) {
+          return next(err);
+        }
+        res.set('Content-Type', 'application/json');
+        res.status(201).send(board);
+      });
     } catch (e) {
       next(e);
     }

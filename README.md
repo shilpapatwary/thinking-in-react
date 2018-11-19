@@ -1,3 +1,12 @@
+Heroku app:
+https://flexbox-ajax-18112018.herokuapp.com
+
+Heroku Git repo :  https://git.heroku.com/flexbox-ajax-18112018.git
+
+
+
+
+
 Due Date :- 19/11/2018
 
 
