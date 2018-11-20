@@ -1,67 +1,61 @@
-# Assignment - Week 4
+# Assignment - Week 5
 
-Due Date :- 19/11/2018
+Submission date : 26th Nov
 
-# Part 1
-The objective is to demonstrate implementation of FullStack functionality, including UI Design, API desing, persistance and testing.
-The UI needs to look professional.
+The objective is to develop any one of the below applications with mentioned functionality.
 
-For the Note application:
-1. Extend all your previous Note assignment routes to store, retrieve update and delete notes to / from Mongo DB.
-1. Configure ExpressJS to serve static HTML page from `public` folder.
-2. Create a file `public/notes.html`
-    1. Create the static view for displaying notes
-    1. Implement the following functionality using AJAX and DOM Manipulation
-    - Retrieve notes from server
-    - Create a new note
-    - mark a note as completed.
-    - Edit a note
+## Part 1
+For the Trello Application:
+
+## Develop and design UI & backend for a Kanban like application with the functionalities.
+
+### functional requirements
+
+1. Create, Retrieve, Update and Delete Boards
+1. Create a list at an index in Board
+1. Create a card at an index in a list in a Board
+1. user registration and authentication
+1. Add member to a board.
+1. users can collaborate on boards in real time over sockets. 
+
+### Technical requirements
+1. Write express routes and socket.io code to support above functionalities.
+1. Write test cases for the express routes.
+1. Write Swagger document for all your REST APIs
+1. App should have Gitlab CI/CD configured and deployed onto Heroku.
+1. Design UI using HTML5, CSS3, Flexbox and native DOM manipulation.
+1. All express routes must be protected.
 
 
 # Part 2
-The objective is to demonstrate Design of FullStack functionality, including UI Design, API desing, persistance and testing.
-The UI needs to look professional.
+## Design and Develop Collaboration Application, like slack which include the     following functionality
 
-For the Trello Application:
-1. Extend all your previous assignment routes to store, retrieve, update and delete data to / from Mongo DB.
-1. Configure ExpressJS to serve static HTML pages from `public` folder.
-2. Create file `public/boards.html`
-    1. Create the static views for displaying list of boards, using flexbox
-    1. Implement the following functionality using AJAX and DOM Manipulation
-    - Retrieve list of boards from the server
-    - Create a new board
-    - Delete board
-    - Edit board name
-2. Create file `public/lists.html`
-    1. Create the static views for displaying list of cards, using flexbox
-    1. Implement the following functionality using AJAX and DOM Manipulation
-    - Retrieve list of cards from the server
-    - Create a new card
-    - Delete a card
-    - Edit existing card
+### functional requirements
+1. Create, Retrieve, Update and Delete Workspaces
+1. Add users to workspace
+1. Create channel in workspace
+1. Add users to channels in workspace
+1. List Users in a channel
+1. send messages to channels
+1. user signnup and login.
 
-# Part 3
-The objective is to demonstrate design of FullStack functionality, including UI Design, API desing, persistance and testing.
-The UI needs to look professional.
-
-For the Slack Application:
-1. Extend all your previous assignment routes to store, retrieve, update and delete data to / from Mongo DB.
-1. Configure ExpressJS to server static HTML pages from `public` folder.
-2. Create a file `public/channels.html`.
-    1. create a static view for sending / recieving messages in a channel.
-2. create a file `public/messages.html`
-    1. create a static view for sending / recieving messages.
+### Technical requirements
+1. Write express routes and socket.io code to support above functionalities.
+1. Write test cases for the express routes.
+1. Write Swagger document for all your REST APIs
+1. App should have Gitlab CI/CD configured and deployed onto Heroku.
+1. Design UI using HTML5, CSS3, Flexbox and native DOM manipulation.
+1. All express routes must be protected.
 
 # Prerequisites
 1. Ensure NodeJS, NPM and Git are installed
 1. Ensure a Text Editor is installed. Choose one of Sublime Text 3, Visual Studio Code, or Atom
 
 # Setup
-1. Start by forking and cloning this repository into your account.
-1. Add your 03-passport-mocha repository as a remote with the command: `git add remote 03-passport-mocha <insert-03-passport-mocha-repository-url-here>`
-1. git remote -v should display origin and 03-passport-mocha
-1. pull your 03-passport-mocha changes into the master branch with the command: `git pull 03-passport-mocha master`. Now there will be merge conflict in README.md file.
-1. Update the Readme.md file to these instructions, and remove the instructions from 03-passport-mocha.
+1. Start by forking this repository into your account.
+2. Add your 04-mongo-flexbox-ajax-dom repository as a remote with the command: `git add remote 04-mongo-flexbox-ajax-dom <insert-04-mongo-flexbox-ajax-dom-repository-url-here>`
+3. Merge your 04-mongo-flexbox-ajax-dom changes into the master branch with the command: `git merge 04-mongo-flexbox-ajax-dom/master`. You will get a merge conflict in Readme.md file.
+4. Update the Readme.md file to these instructions, and remove the instructions from 04-mongo-flexbox-ajax-dom.
 5. Commit the changes. You are now ready to start working on this programming task.
 
 # Submission
