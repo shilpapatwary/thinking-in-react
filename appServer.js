@@ -4,7 +4,7 @@ const bodyparser = require('body-parser');
 const session = require('express-session');
 const jsonServer = require('json-server');
 const path = require('path');
-const ejs = require('ejs');
+const jade = require('jade');
 
 require('./config/dbConnection');
 
@@ -35,10 +35,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.resolve(__dirname, 'public')));
-app.set('views', path.resolve(__dirname, '/public/views'));
-app.engine('html', ejs.renderFile);
-
-app.set('view engine', 'html');
+app.set('views', path.resolve(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use('/auth', userRouter);
 app.use('/api/notes', notesRouter);

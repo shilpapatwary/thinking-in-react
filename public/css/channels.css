@@ -5,6 +5,7 @@ body{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow:hidden;
 }
 header {
   height:50px;
@@ -84,17 +85,31 @@ line-height:50px;
 }
 .messageInput{
     width:100%;
-    
 }
+
 .messageContainer{
-    height:80%;
+    height:429px;
+    padding:2%;
+    overflow: auto;
 }
 .messageInput{
     height:90px;
 }
-.channelMessages{
-    display:none;
+
+.channelMessages form{
+    position: relative;
 }
-.channel form{
-    height:100%;
+.submitMessage{
+    width: 10%;
+    right: 0%;
+    bottom: 0%;
+    height: 95px;
+    position: absolute;
+}
+.channelMessages{
+    display: flex;
+    flex-direction: column;
+}
+.hidden{
+    display:none;
 }

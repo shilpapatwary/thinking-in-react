@@ -61,16 +61,89 @@ input:focus,textarea:focus{
 outline: none;
 }
 .updateboard{
-width:15%;
-height:20px;
-float:right;
-cursor:pointer;
-border:1px solid #cccccc;
-background-color: gray;
-color:#ffffff;
-text-align: center;
-margin-right:5px;
+    width: 8%;
+    height: 16px;
+    float: right;
+    cursor: pointer;
+    border: 1px solid #cccccc;
+    background-color: #00bcd4;
+    color: #ffffff;
+    text-align: center;
+    margin-right: 5px;
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 17px;
 }
 .boardTitle{
-flex-grow: 2;
+color: #ffffff;
+    background-color: #3267a4;
+    width: 85%;
+}
+.updateboard{
+    flex-grow:1;
+}
+.success{
+    background-color: #8bc34a;
+}
+.boardBody{
+    height:75px;
+}
+.listTitle{
+    text-align: center;
+    padding:3%;
+}
+.list{
+    width: 25%;
+    border: 1px solid #03a9f4;
+    margin: 2%;
+    background-color: aliceblue;
+}
+.addCard{
+    padding:2%;
+    color: darkgray;
+    cursor: pointer;
+}
+.addCard:hover{
+    color:black;
+}
+.card{
+    width: 95%;
+    height: 50px;
+    border: 1px solid #607D8B;
+    margin: 2%;
+    background-color: #9e9e9e30;
+    text-align: center;
+}
+.breadcrumb{
+    margin:2%;
+    cursor:pointer;
+}
+.cardTitle{
+    line-height: 50px;
+}
+.hidden{
+    display:none;
+}
+
+#addListForm.hidden{
+    display:none;
+}
+.addList{
+    margin:2%;
+    color:blue;
+    cursor:pointer;
+    display:flex;
+}
+#addListForm{
+    display:flex;
+    margin-left:2%;
+}
+#addListForm input{
+    background-color: #faebd7;
+    margin-right:2%;
+    border:1px solid #ffc0cb;
+}
+.boardLists{
+    display: flex;
+    flex-wrap: wrap;
 }

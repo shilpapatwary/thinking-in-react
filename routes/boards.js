@@ -14,9 +14,9 @@ router.route('/:id')
   .delete(isLoggedin, boardsController.deleteBoard);
 
 // Create a list at an index in Board
-router.route('/:id/lists').post(isLoggedin, boardsController.createListInBoard);
+router.route('/:id/lists').put(isLoggedin, boardsController.createListInBoard);
 
 // Create a card at an index in a list in a Board
-router.route('/:bid/lists/:id/cards').post(isLoggedin, boardsController.createCardInList);
+router.route('/:bid/lists/:id/cards').put(isLoggedin, boardsController.createCardInList);
 
 module.exports = router;

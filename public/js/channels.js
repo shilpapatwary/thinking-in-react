@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
 class Channels {
@@ -37,12 +38,13 @@ class Channels {
   }
 
   createMessageContainer(data) {
-    const markup = `<div class="channelMessages" id="messageContainer${data.id}">
+    const markup = `<div class="channelMessages hidden" id="messageContainer${data.id}">
     <div class="messageContainer">
         </div>
         <div class="inputContainer">
-            <form id="messageForm">
+            <form id="messageForm${data.id}" data-id="${data.id}">
                 <input type="text" name="message" class="messageInput">
+                <button class="submitMessage" id="submit${data.id}">Enter</button>
             </form>
         </div>
 </div>`;
@@ -84,36 +86,9 @@ class Channels {
     this.service(options);
   }
 
-  addchannel() {
-    const channelData = JSON.stringify({
-      id: Math.floor(Math.random() * 100000),
-      name: 'My channel',
-      messages: ['hello'],
-    });
-    const options = {
-      url: '/api/channels',
-      method: 'post',
-      body: channelData,
-      credentials: 'include',
-      callback: this.addchannelToList.bind(this),
-    };
-    this.service(options);
-  }
-
   deleteFromList(channel) {
     const elem = document.getElementById(channel.id);
     document.getElementById('channelsContainer').removeChild(elem);
-  }
-
-  deletechannel(elem) {
-    const channelId = elem.closest('.channel').id;
-    const options = {
-      url: `/api/channels/${channelId}`,
-      method: 'delete',
-      credentials: 'include',
-      callback: this.deleteFromList.bind(this),
-    };
-    this.service(options);
   }
 
   updateToList(data) {
@@ -138,7 +113,9 @@ class Channels {
   }
 
   displaychannel(data) {
-    console.log(data);
+    this.addMessageToList(data);
+    Array.from(document.getElementsByClassName('channelMessages'), (c) => { c.classList.add('hidden'); });
+    document.getElementById(`messageContainer${data.id}`).classList.remove('hidden');
   }
 
   openchannel(elem) {
@@ -152,6 +129,31 @@ class Channels {
     this.service(options);
   }
 
+  addMessageToList(data) {
+    const messageMarkup = [];
+    data.messages.forEach((m) => {
+      messageMarkup.push(`<div>${m.message}</div>`);
+    });
+    const container = document.getElementById(`messageContainer${data.id}`).querySelector('.messageContainer');
+    container.innerHTML = messageMarkup.join('');
+    document.getElementById(`messageForm${data.id}`).reset();
+  }
+
+  submitMessage(elem) {
+    const messageForm = elem.parentElement;
+    const newMessage = {
+      message: messageForm.querySelector('.messageInput').value,
+    };
+    const options = {
+      url: `/api/channels/${messageForm.getAttribute('data-id')}`,
+      method: 'put',
+      body: JSON.stringify(newMessage),
+      credentials: 'include',
+      callback: this.addMessageToList.bind(this),
+    };
+    this.service(options);
+  }
+
   bindings() {
     Array.from(document.getElementsByClassName('channel'), c => c.addEventListener('click', (event) => {
       event.stopImmediatePropagation();
@@ -160,6 +162,11 @@ class Channels {
     window.addEventListener('load', () => {
       this.showAllchannels();
     });
+    Array.from(document.getElementsByClassName('submitMessage'), c => c.addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
+      event.preventDefault();
+      this.submitMessage(event.currentTarget);
+    }));
   }
 }
 // eslint-disable-next-line no-new

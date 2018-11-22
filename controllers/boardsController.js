@@ -19,9 +19,9 @@ const boardsController = {
     try {
       Boards.findOne({ id: req.params.id }, (err, response) => {
         if (err) { return next(err); }
-        res.set('Content-Type', 'application/json');
-        // res.status(200).send(response);
-        res.render('lists.html');
+        res.set('Content-Type', 'text/html');
+        res.status(200);
+        res.render('list', response);
       });
     } catch (e) {
       next(e);
@@ -37,7 +37,6 @@ const boardsController = {
         res.status(202).send(board);
       });
     } catch (e) {
-      console.log(e);
       next(e);
     }
   },
@@ -72,16 +71,17 @@ const boardsController = {
   },
   createListInBoard: (req, res, next) => {
     try {
+      const options = { new: true };
       const list = req.body;
       list.id = `${Math.floor(Math.random() * 100000)}`;
-      const boardId = req.params.id;
-      const boardIndex = boards.findIndex(b => b.id === boardId);
-      if (boardIndex === -1) res.set(404).send('Board ID not found!');
-      else {
-        boards[boardIndex].lists.push(list);
-        res.set('content-type', 'application/json');
-        res.set(200).send(list);
-      }
+      const update = { $push: { lists: list } };
+      console.log(update);
+      Boards.findOneAndUpdate({ id: req.params.id }, update, options, (err, board) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'text/html');
+        res.status(200);
+        res.render('list', board);
+      });
     } catch (e) {
       next(e);
     }
@@ -91,15 +91,7 @@ const boardsController = {
       const card = req.body;
       card.id = `${Math.floor(Math.random() * 100000)}`;
       const boardId = req.params.bid;
-      const boardIndex = boards.findIndex(b => b.id === boardId);
-      if (boardIndex === -1) res.set(404).send('Board ID not found!');
-      else {
-        const listIndex = boards[boardIndex].lists.findIndex(l => l.id === req.params.id);
-        const list = boards[boardIndex].lists[listIndex];
-        list.cards.push(card);
-        res.set('content-type', 'application/json');
-        res.set(200).send(card);
-      }
+      const listId = req.params.lid;
     } catch (e) {
       next(e);
     }
