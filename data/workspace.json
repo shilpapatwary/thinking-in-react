@@ -1,0 +1,62 @@
+[
+    {
+        "id":"123456",
+        "name":"full_stack_dev_workspace",
+        "desc":"",
+        "descData":null,
+        "workspace-url":"fullstackdev.slack.com",
+        "users":[{
+            "id" :"user1",
+            "name" : "Shilpa"
+        }],
+        "channels":[
+            {
+                "id" : "gtyje4",
+                "name" : "random",
+                "desc" : "",
+                "users":[{
+                    "id" :"user1",
+                    "name" : "Shilpa"
+                }]
+            }
+        ]
+    },
+    {
+        "id":"5647897",
+        "name":"companyInitiatives",
+        "desc":"",
+        "descData":null,
+        "workspace-url":"companyinitiatives.slack.com",
+        "users":[{
+            "id" :"user1",
+            "name" : "Shilpa"
+        }],
+        "channels":[
+            {
+                "id" : "hufnr890",
+                "name" : "random",
+                "desc" : "",
+                "users":[]
+            }
+        ]
+    },
+    {
+        "id":"23456",
+        "name":"corporate_socia_responsibility",
+        "desc":"",
+        "descData":null,
+        "workspace-url":"csr.slack.com",
+        "users":[{
+            "id" :"user1",
+            "name" : "Shilpa"
+        }],
+        "channels":[
+            {
+                "id" : "ioferfj",
+                "name" : "random",
+                "desc" : "",
+                "users":[]
+            }
+        ]
+    }
+]

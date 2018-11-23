@@ -1,0 +1,18 @@
+section#Lists
+  section.breadcrumb
+    span#linkBoards Back to boards
+  section.listSection(id='#{id}')
+    .addList
+      span#addList + Add a list
+      form#addListForm.hidden
+        input#listTitle(type='text', name='listTitle', value='')
+        button.listSubmit Submit
+    .boardLists
+      each list in lists
+        .list(id="#{list.id}")
+          .listTitle #{list.name}
+            each card in list.cards
+              .cards
+                .card(id='#{card.id}')
+                  span.cardTitle #{card.name}
+          .addCard + Add card
