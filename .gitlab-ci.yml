@@ -29,11 +29,6 @@ lint-checks:
   script: 
     - npm run lint
 
-unit-tests:
-  stage: test
-  script:
-    - npm run test
-
 # write the heroku-deployment job here
 heroku-deployment:
     stage: deploy
