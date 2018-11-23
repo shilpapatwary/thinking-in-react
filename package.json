@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node appServer.js",
     "lint": "./node_modules/.bin/eslint *.js",
-    "test": "mocha"
+    "test" : "mocha --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
