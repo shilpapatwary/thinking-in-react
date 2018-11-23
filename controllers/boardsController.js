@@ -75,7 +75,6 @@ const boardsController = {
       const list = req.body;
       list.id = `${Math.floor(Math.random() * 100000)}`;
       const update = { $push: { lists: list } };
-      console.log(update);
       Boards.findOneAndUpdate({ id: req.params.id }, update, options, (err, board) => {
         if (err) { return next(err); }
         res.set('Content-Type', 'text/html');
@@ -89,9 +88,17 @@ const boardsController = {
   createCardInList: (req, res, next) => {
     try {
       const card = req.body;
+      const options = { new: true };
       card.id = `${Math.floor(Math.random() * 100000)}`;
       const boardId = req.params.bid;
       const listId = req.params.lid;
+      const update = { $push: { 'lists.$.cards': card } };
+      Boards.findOneAndUpdate({ id: boardId, 'lists[id]': listId }, update, options, (err, board) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'text/html');
+        res.status(200);
+        res.render('list', board);
+      });
     } catch (e) {
       next(e);
     }
