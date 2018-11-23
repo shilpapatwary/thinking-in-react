@@ -4,7 +4,6 @@ const bodyparser = require('body-parser');
 const session = require('express-session');
 const jsonServer = require('json-server');
 const path = require('path');
-const jade = require('jade');
 
 require('./config/dbConnection');
 
