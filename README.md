@@ -18,11 +18,13 @@ The objective is to dockerize your application, and implement scalable authentic
 1. Ensure Docker and docker-compose is installed
 
 # Setup
-1. Start by forking this repository into your account.
-2. Add your 05-socket.io repository as a remote with the command: `git add remote 05-socket.io <insert-05-socket.io-repository-url-here>`
-3. Merge your 05-socket.io changes into the master branch with the command: `git merge 05-socket.io`. You will get a merge conflict in Readme.md file.
-4. Update the Readme.md file to these instructions, and remove the instructions from 05-socket.io.
+1. Start by forking and cloning this repository into your account.
+1. Add your 05-socket.io repository as a remote with the command: `git add remote 05-socket.io <insert-05-socket.io-repository-url-here>`
+1. git remote -v should display origin and 05-socket.io
+1. pull your 05-socket.io changes into the master branch with the command: `git pull 05-socket.io master`. Now there will be merge conflict in README.md file.
+1. Update the Readme.md file to these instructions, and remove the instructions from 05-socket.io.
 5. Commit the changes. You are now ready to start working on this programming task.
+
 
 # Submission
 1. After completing the exercise/assignment, create a git tag by typing the command `git tag submission`
