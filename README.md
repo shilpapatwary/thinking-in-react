@@ -19,9 +19,9 @@ The objective is to dockerize your application, and implement scalable authentic
 
 # Setup
 1. Start by forking this repository into your account.
-2. Add your 04-mongo-flexbox-ajax-dom repository as a remote with the command: `git add remote 04-mongo-flexbox-ajax-dom <insert-04-mongo-flexbox-ajax-dom-repository-url-here>`
-3. Merge your 04-mongo-flexbox-ajax-dom changes into the master branch with the command: `git merge 04-mongo-flexbox-ajax-dom/master`. You will get a merge conflict in Readme.md file.
-4. Update the Readme.md file to these instructions, and remove the instructions from 04-mongo-flexbox-ajax-dom.
+2. Add your 06-scalable-auth-with-docker repository as a remote with the command: `git add remote 06-scalable-auth-with-docker <insert-06-scalable-auth-with-docker-repository-url-here>`
+3. Merge your 06-scalable-auth-with-docker changes into the master branch with the command: `git merge 06-scalable-auth-with-docker`. You will get a merge conflict in Readme.md file.
+4. Update the Readme.md file to these instructions, and remove the instructions from 06-scalable-auth-with-docker.
 5. Commit the changes. You are now ready to start working on this programming task.
 
 # Submission
