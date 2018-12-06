@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node appServer.js",
     "lint": "./node_modules/.bin/eslint *.js",
-    "test": "mocha --timeout 10000 --exit",
-    "build": "webpack"
+    "test": "mocha --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
@@ -34,22 +33,13 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.0",
-    "@babel/node": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
-    "@babel/register": "^7.0.0",
-    "babel-loader": "^8.0.4",
     "chai": "^4.2.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "heroku": "^7.18.3",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.7",
-    "supertest": "^3.3.0",
-    "webpack": "^4.27.0",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "nodemon": "^1.18.5",
+    "supertest": "^3.3.0"
   }
 }

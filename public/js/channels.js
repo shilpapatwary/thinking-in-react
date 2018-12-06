@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
-class Channels {
+export default class Channels {
   constructor() {
     this.init();
   }
@@ -73,6 +73,8 @@ class Channels {
     });
     this.insertMarkup(channelsMarkup.join(''));
     this.insertMessageMarkup(messageMarkup.join(''));
+    document.getElementById('workspaceParentContainer').classList.add('hidden');
+    document.getElementById('channelParentContainer').classList.remove('hidden');
     this.bindings();
   }
 
@@ -159,9 +161,10 @@ class Channels {
       event.stopImmediatePropagation();
       this.openchannel(event.currentTarget);
     }));
-    window.addEventListener('load', () => {
-      this.showAllchannels();
-    });
+    Array.from(document.getElementsByClassName('openWorkspace'), c => c.addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
+      this.displaychannels(event.currentTarget);
+    }));
     Array.from(document.getElementsByClassName('submitMessage'), c => c.addEventListener('click', (event) => {
       event.stopImmediatePropagation();
       event.preventDefault();
@@ -169,5 +172,3 @@ class Channels {
     }));
   }
 }
-// eslint-disable-next-line no-new
-new Channels();
