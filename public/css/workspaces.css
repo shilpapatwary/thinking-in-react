@@ -88,56 +88,57 @@ color: #ffffff;
 }
 
 
-.channelParentContainer .addchannel{
+#channelParentContainer .addchannel{
     cursor: pointer;
      font-weight: bold;
      font-size:60px;
      margin-right:40px;
  }
- .channelParentContainer ul{
+ #channelParentContainer ul{
      margin:0;
      padding:0;
  }
- .channelParentContainer li{
+ #channelParentContainer li{
      width:400px;
      height:50px;
      list-style: none;
      border-bottom:1px solid #000000;
  }
- .channelParentContainer .info{
+ #channelParentContainer .info{
      display: none;
      color:#ffffff;
      font-size:15px;
  }
- .channelParentContainer #addchannelsIcon:hover .info{
+ #channelParentContainer #addchannelsIcon:hover .info{
      display:block;
  }
- .channelParentContainer .channelHeader{
+ #channelParentContainer .channelHeader{
      display: flex;
      justify-content: space-between;
      padding:0 10px 0 10px;
      height:100%;
      cursor:pointer;
+     color: #5c8687;
  }
  
- .channelParentContainer .mainSection{
+ #channelParentContainer .mainSection{
      display:flex;
      height:100vh;
  }
- .channelParentContainer .channelsContainer{
+ #channelParentContainer .channelsContainer{
      display:flex;
      flex-direction:column;
      height:100%;
  }
- .channelParentContainer .channelsSection{
+ #channelParentContainer .channelsSection{
      border-right:1px solid black;
  }
  
- .channelParentContainer  .messageSection{
+ #channelParentContainer  .messageSection{
      flex-grow: 3;
  }
  
- .channelParentContainer .updatechannel{
+ #channelParentContainer .updatechannel{
  width:15%;
  height:20px;
  float:right;
@@ -148,34 +149,34 @@ color: #ffffff;
  text-align: center;
  margin-right:5px;
  }
- .channelParentContainer .channelTitle{
+ #channelParentContainer .channelTitle{
  flex-grow: 2;
  line-height:50px;
  }
- .channelParentContainer .messageInput{
+ #channelParentContainer .messageInput{
      width:100%;
  }
  
- .channelParentContainer .messageContainer{
+ #channelParentContainer .messageContainer{
      height:429px;
      padding:2%;
      overflow: auto;
  }
- .channelParentContainer .messageInput{
+ #channelParentContainer .messageInput{
      height:90px;
  }
  
- .channelParentContainer .channelMessages form{
+ #channelParentContainer .channelMessages form{
      position: relative;
  }
- .channelParentContainer  .submitMessage{
+ #channelParentContainer  .submitMessage{
      width: 10%;
      right: 0%;
      bottom: 0%;
      height: 95px;
      position: absolute;
  }
- .channelParentContainer  .channelMessages{
+ #channelParentContainer  .channelMessages{
      display: flex;
      flex-direction: column;
  }
@@ -183,4 +184,31 @@ color: #ffffff;
  #addUserForm, #addChannelForm{
     width: 20%;
     margin-left: 5%;
+ }
+
+ #channelParentContainer .hidden{
+     display:none;
+ }
+
+ .channelHeader i{
+    line-height: 50px;
+    margin-right:3%;
+ }
+ .channelHeader input{
+    margin: 3% 5% 3% 0;
+ }
+ #userListDialog {
+    position: absolute;
+    top: 21%;
+    right: 0%;
+    border: 2px solid black;
+    padding: 1%;
+    background-color: wheat;
+    width: 24%;
+    height: auto;
+ }
+
+ #closeUserDialog{
+     float:right;
+     cursor: pointer;
  }

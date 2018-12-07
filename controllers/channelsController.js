@@ -5,7 +5,7 @@ const Channels = require('../model/channelModel');
 const channelsController = {
   getAllchannels: (req, res, next) => {
     try {
-      Channels.find((err, response) => {
+      Channels.findOne((err, response) => {
         if (err) { return next(err); }
         res.set('Content-Type', 'application/json');
         res.status(200).send(response);
@@ -32,11 +32,25 @@ const channelsController = {
       Channels.findOne({ id: req.params.id }, (err, response) => {
         if (err) { return next(err); }
         res.set('Content-Type', 'application/json');
-        console.log(response);
         res.status(200).send(response);
       });
     } catch (e) {
       console.log(e);
+      next(e);
+    }
+  },
+  addUsersToChannel: (req, res, next) => {
+    try {
+      const options = { new: true };
+      const user = req.body;
+      const update = { $push: { users: user } };
+      Channels.findOneAndUpdate({ id: req.params.id }, update, options, (err, channel) => {
+        if (err) { return next(err); }
+        res.set('Content-Type', 'application/json');
+        res.status(200);
+        res.send(channel);
+      });
+    } catch (e) {
       next(e);
     }
   },

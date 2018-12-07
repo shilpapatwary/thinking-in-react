@@ -10,8 +10,8 @@ const userModel = mongoose.model('user', userSchema);
 
 module.exports = userModel;
 
-module.exports.getUserById = (id, cb) => {
-  userModel.findById(id, cb);
+module.exports.getUserById = (uid, cb) => {
+  userModel.findOne({ id: uid }, cb);
 };
 
 module.exports.getUserByName = (name, cb) => {

@@ -10,6 +10,7 @@ const workspaceSchema = mongoose.Schema({
   channels: [
     {
       id: String,
+      wid: String,
       name: String,
       users: [{
         id: String,

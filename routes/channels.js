@@ -5,9 +5,11 @@ const isLoggedin = require('../userAuthentication');
 const router = express.Router();
 
 router.route('/')
-  .get(isLoggedin, channelsController.getAllchannels);
+  .get(channelsController.getAllchannels);
 router.route('/:id')
-  .put(isLoggedin, channelsController.updatechannel)
-  .get(isLoggedin, channelsController.getChannel);
+  .put(channelsController.updatechannel)
+  .get(channelsController.getChannel);
+router.route('/:id/users')
+  .put(channelsController.addUsersToChannel);
 
 module.exports = router;

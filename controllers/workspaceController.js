@@ -1,6 +1,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
 const Workspaces = require('../model/workspaceModel');
+const Channels = require('../model/channelModel');
 
 const workspaceController = {
   getAllWorkspaces: (req, res, next) => {
@@ -90,6 +91,7 @@ const workspaceController = {
     try {
       const options = { new: true };
       const channel = req.body;
+      const wChannel = new Channels(channel);
       // channel.id = `${Math.floor(Math.random() * 100000)}`;
       const update = { $push: { channels: channel } };
       Workspaces.findOneAndUpdate({ id: req.params.id }, update, options, (err, workspace) => {
@@ -97,6 +99,11 @@ const workspaceController = {
         res.set('Content-Type', 'application/json');
         res.status(200);
         res.send(workspace);
+      });
+      wChannel.save((err) => {
+        if (err) {
+          return next(err);
+        }
       });
     } catch (e) {
       next(e);

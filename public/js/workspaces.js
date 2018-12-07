@@ -60,7 +60,7 @@ export default class Workspaces {
     const markup = this.getNewWorkspaceMarkup(data);
     document.getElementById('workspaceContainer').insertAdjacentHTML('afterbegin', markup);
     this.bindings();
-    this.channels.bindings();
+    // this.channels.bindings();
   }
 
   createWorkspace() {
@@ -186,14 +186,16 @@ export default class Workspaces {
 
   addChannelToWorkspace(workspace) {
     const channel = document.getElementById('workspaceChannel').value;
-    const userData = JSON.stringify({
+    const channelData = JSON.stringify({
       id: `channel${Math.floor(Math.random() * 100000)}`,
+      wid: workspace,
       name: channel,
+      users:[]
     });
     const options = {
       url: `/api/workspaces/${workspace}/channels`,
       method: 'put',
-      body: userData,
+      body: channelData,
       credentials: 'include',
       callback: this.confirmChannel.bind(this),
     };

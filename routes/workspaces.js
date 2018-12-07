@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 const workspaceController = require('../controllers/workspaceController');
 // const isLoggedin = require('../userAuthentication');
+const passport = require('../authenticate');
 
 
 router.route('/')
   .get(workspaceController.getAllWorkspaces)
-  .post(workspaceController.createWorkspace);
+  .post(passport.authenticate('jwt', { session: false }), workspaceController.createWorkspace);
 
 router.route('/:id')
   .put(workspaceController.updateWorkspace)

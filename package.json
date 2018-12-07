@@ -7,7 +7,8 @@
     "start": "node appServer.js",
     "lint": "./node_modules/.bin/eslint *.js",
     "test": "mocha --timeout 10000 --exit",
-    "build": "webpack"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
     "debug": "^4.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "font-awesome": "^4.7.0",
     "jade": "^1.11.0",
     "json-server": "^0.14.0",
     "jsonwebtoken": "^8.4.0",
@@ -31,7 +34,8 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",

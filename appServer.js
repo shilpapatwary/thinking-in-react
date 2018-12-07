@@ -4,17 +4,21 @@ const bodyparser = require('body-parser');
 const session = require('express-session');
 const jsonServer = require('json-server');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 require('./config/dbConnection');
 
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
+const passport = require('./authenticate');
 const notesRouter = require('./routes/notes');
 const boardsRouter = require('./routes/boards');
 const workspacesRouter = require('./routes/workspaces');
 const channelsRouter = require('./routes/channels');
 const userRouter = require('./routes/user');
-const passport = require('./authenticate');
 
-const app = express();
 const port = process.env.PORT || 3000;
 
 const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'boards.json'));
@@ -31,8 +35,11 @@ app.use(bodyparser.json());
 app.use(session({
   secret: 'shilpa',
 }));
+app.use(cookieParser());
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
+// require('./authenticate')(passport);
+
 app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -51,6 +58,16 @@ app.use((req, res) => {
   res.set(404).send('REQUEST NOT FOUND');
 });
 
-app.listen(port, () => {});
+server.listen(port);
+io.on('connection', (socket) => {
+  console.log('user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+  socket.on('chat', (data) => {
+    console.log(`message: ${data.msg}`);
+    io.emit('chat', data);
+  });
+});
 
 module.exports = app;

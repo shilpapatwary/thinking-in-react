@@ -1,13 +1,16 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-undef */
+// import io from 'socket.io-client';
+
 export default class Channels {
   constructor() {
+    this.socket = io();
     this.init();
   }
 
   init() {
-    this.bindings();
+    this.socketBindings();
   }
 
   service(options) {
@@ -31,6 +34,9 @@ export default class Channels {
         <form id="channelUpdate${data.id}">
          <div class="channelHeader">
             <span class="channelTitle">${data.name}</span>
+            <input type="text" id=channelUser${data.id}>
+            <i class="fa fa-user-plus addChannelUser" id="addUser${data.id}"></i>
+            <i class="fa fa-users listUsers" id="listUser${data.id}"></i>
          </div>
         </form>
     </li>`;
@@ -64,10 +70,11 @@ export default class Channels {
     this.bindings();
   }
 
-  displaychannels(channels) {
+  displaychannels(workspace) {
+    const wchannels = workspace.channels;
     const channelsMarkup = [];
     const messageMarkup = [];
-    channels.forEach((channel) => {
+    wchannels.forEach((channel) => {
       channelsMarkup.push(this.createchannel(channel));
       messageMarkup.push(this.createMessageContainer(channel));
     });
@@ -78,9 +85,10 @@ export default class Channels {
     this.bindings();
   }
 
-  showAllchannels() {
+  showAllchannels(elem) {
+    const workspaceId = elem.closest('.workspace').id;
     const options = {
-      url: '/api/channels',
+      url: `/api/workspaces/${workspaceId}`,
       method: 'get',
       credentials: 'include',
       callback: this.displaychannels.bind(this),
@@ -121,7 +129,7 @@ export default class Channels {
   }
 
   openchannel(elem) {
-    const channelId = elem.id;
+    const channelId = elem.closest('.channel').id;
     const options = {
       url: `/api/channels/${channelId}`,
       method: 'get',
@@ -143,32 +151,101 @@ export default class Channels {
 
   submitMessage(elem) {
     const messageForm = elem.parentElement;
+    const channelId = messageForm.getAttribute('data-id');
+    const messageText = messageForm.querySelector('.messageInput').value;
+    this.socket.emit('chat', { msg: messageText, channel: channelId });
     const newMessage = {
-      message: messageForm.querySelector('.messageInput').value,
+      message: messageText,
     };
     const options = {
-      url: `/api/channels/${messageForm.getAttribute('data-id')}`,
+      url: `/api/channels/${channelId}`,
       method: 'put',
       body: JSON.stringify(newMessage),
       credentials: 'include',
-      callback: this.addMessageToList.bind(this),
+      // callback: this.addMessageToList.bind(this),
+    };
+    this.service(options);
+  }
+
+  confirmChannelUser(channel) {
+    document.getElementById(`channelUser${channel.id}`).value = '';
+    document.getElementById(`${channel.id}`).classList.add('success');
+    setTimeout(() => {
+      document.getElementById(`${channel.id}`).classList.remove('success');
+    }, 2000);
+  }
+
+  addUserToChannel(elem) {
+    const channelId = elem.closest('.channel').id;
+    const user = document.getElementById(`channelUser${channelId}`).value;
+    const userData = JSON.stringify({
+      id: `user${Math.floor(Math.random() * 100000)}`,
+      name: user,
+    });
+    const options = {
+      url: `/api/channels/${channelId}/users`,
+      method: 'put',
+      body: userData,
+      credentials: 'include',
+      callback: this.confirmChannelUser.bind(this),
+    };
+    this.service(options);
+  }
+
+  displayUsers(channel) {
+    const userList = document.getElementById('userListDialog');
+    const userListMarkup = ['<div><i class="fa fa-close" id="closeUserDialog"></i></div>'];
+    channel.users.forEach((user) => {
+      userListMarkup.push(`<div>${user.name}</div>`);
+    });
+    userList.innerHTML = userListMarkup.join('');
+    userList.classList.remove('hidden');
+    this.bindings();
+  }
+
+  listChannelUsers(elem) {
+    const channelId = elem.closest('.channel').id;
+    const options = {
+      url: `/api/channels/${channelId}`,
+      method: 'get',
+      credentials: 'include',
+      callback: this.displayUsers.bind(this),
     };
     this.service(options);
   }
 
   bindings() {
-    Array.from(document.getElementsByClassName('channel'), c => c.addEventListener('click', (event) => {
+    Array.from(document.getElementsByClassName('channelTitle'), c => c.addEventListener('click', (event) => {
       event.stopImmediatePropagation();
       this.openchannel(event.currentTarget);
     }));
     Array.from(document.getElementsByClassName('openWorkspace'), c => c.addEventListener('click', (event) => {
       event.stopImmediatePropagation();
-      this.displaychannels(event.currentTarget);
+      this.showAllchannels(event.currentTarget);
     }));
     Array.from(document.getElementsByClassName('submitMessage'), c => c.addEventListener('click', (event) => {
       event.stopImmediatePropagation();
       event.preventDefault();
       this.submitMessage(event.currentTarget);
     }));
+    Array.from(document.getElementsByClassName('addChannelUser'), c => c.addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
+      this.addUserToChannel(event.currentTarget);
+    }));
+    Array.from(document.getElementsByClassName('listUsers'), c => c.addEventListener('click', (event) => {
+      event.stopImmediatePropagation();
+      this.listChannelUsers(event.currentTarget);
+    }));
+    document.getElementById('closeUserDialog').addEventListener('click', () => {
+      document.getElementById('userListDialog').classList.add('hidden');
+    });
+  }
+
+  socketBindings() {
+    this.socket.on('chat', (data) => {
+      const chatChannel = document.getElementById(`messageContainer${data.channel}`).querySelector('.messageContainer');
+      chatChannel.insertAdjacentHTML('beforeend', `<div>${data.msg}</div>`);
+      document.getElementById(`messageForm${data.channel}`).reset();
+    });
   }
 }

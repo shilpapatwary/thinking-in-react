@@ -7,11 +7,13 @@ const User = require('./model/userModel');
 
 const opts = {};
 
-opts.jwtFromRequest = ExtrctJwt.fromAuthHeaderAsBearerToken();
+opts.jwtFromRequest = ExtrctJwt.fromExtractors([ExtrctJwt.fromAuthHeaderAsBearerToken(),
+  req => (req.cookies ? req.cookies.accessToken : null)]);
 opts.secretOrKey = 'shilpa';
 
-passport.use(new JwtStrategy(opts, ((jwtPayload, done) => {
-  User.getUserById(jwtPayload._doc._id, (err, user) => {
+passport.use(new JwtStrategy(opts, ((payload, done) => {
+  console.log(payload);
+  User.getUserById(payload.sub.id, (err, user) => {
     if (err) {
       return done(err, false);
     }

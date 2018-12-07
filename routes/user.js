@@ -29,18 +29,10 @@ router.route('/login').get((req, res, next) => {
     User.comparePassword(pswd, user.password, (e, isMatch) => {
       if (e) throw err;
       if (isMatch) {
-        const tken = jwt.sign(JSON.parse(JSON.stringify(user)), secret, { expiresIn: 600000 });
-        res.json({
-          success: true,
-          token: tken,
-          user: {
-            id: user._id,
-            username: user.username,
-            password: user.password,
-          },
-        });
+        const token = `JWT ${jwt.sign(JSON.parse(JSON.stringify(user)), secret, { expiresIn: 600000 })}`;
+        res.cookie('accessToken', token).send('You are logged in!');
       } else {
-        return res.json({ success: false, message: 'password does not match' });
+        return res.json('password does not match');
       }
     });
   });
