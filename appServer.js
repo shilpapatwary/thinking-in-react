@@ -47,7 +47,7 @@ app.set('view engine', 'jade');
 app.use('/auth', userRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/boards', boardsRouter);
-app.use('/api/workspaces', workspacesRouter);
+app.use('/api/workspaces', passport.authenticate('jwt', { session: false }), workspacesRouter);
 app.use('/api/channels', channelsRouter);
 
 app.use((err, req, res, next) => {

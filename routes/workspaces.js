@@ -8,7 +8,7 @@ const passport = require('../authenticate');
 
 router.route('/')
   .get(workspaceController.getAllWorkspaces)
-  .post(passport.authenticate('jwt', { session: false }), workspaceController.createWorkspace);
+  .post(workspaceController.createWorkspace);
 
 router.route('/:id')
   .put(workspaceController.updateWorkspace)
