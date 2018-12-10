@@ -15,8 +15,7 @@ opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = 'shilpa';
 
 passport.use(new JwtStrategy(opts, ((payload, done) => {
-  console.log(payload);
-  User.getUserById(payload.sub.id, (err, user) => {
+  User.getUserByName(payload.username, (err, user) => {
     if (err) {
       return done(err, false);
     }
