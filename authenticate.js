@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
-// const ExtrctJwt = require('passport-jwt').ExtractJwt;
+const ExtrctJwt = require('passport-jwt').ExtractJwt;
 const User = require('./model/userModel');
 
 const opts = {};
@@ -11,7 +11,8 @@ const cookieExtractor = (req) => {
   const token = req && req.cookies ? req.cookies.accessToken : null;
   return token;
 };
-opts.jwtFromRequest = cookieExtractor;
+opts.jwtFromRequest = ExtrctJwt.fromExtractors([ExtrctJwt.fromAuthHeaderAsBearerToken(),
+  cookieExtractor]);
 opts.secretOrKey = 'shilpa';
 
 passport.use(new JwtStrategy(opts, ((payload, done) => {

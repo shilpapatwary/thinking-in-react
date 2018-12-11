@@ -81,63 +81,6 @@
           "users": []
         }
       ]
-    },
-    {
-      "id": "33420",
-      "name": "My Workspace",
-      "users": [],
-      "channels": []
-    },
-    {
-      "id": "78965",
-      "name": "corporate_social",
-      "users": [
-        {
-          "id": "user1",
-          "name": "Shilpa"
-        }
-      ],
-      "channels": [
-        {
-          "id": "ioferfj",
-          "name": "random",
-          "users": []
-        }
-      ]
-    },
-    {
-      "id": "60443",
-      "name": "corporate_social",
-      "users": [
-        {
-          "id": "user1",
-          "name": "Shilpa"
-        }
-      ],
-      "channels": [
-        {
-          "id": "ioferfj",
-          "name": "random",
-          "users": []
-        }
-      ]
-    },
-    {
-      "id": "1544",
-      "name": "corporate_social",
-      "users": [
-        {
-          "id": "user1",
-          "name": "Shilpa"
-        }
-      ],
-      "channels": [
-        {
-          "id": "ioferfj",
-          "name": "random",
-          "users": []
-        }
-      ]
     }
   ],
   "channels": [

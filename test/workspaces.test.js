@@ -28,7 +28,7 @@ mocha.describe('Slack Application', () => {
       .expect('content-type', /json/)
       .expect(200)
       .end((error, res) => {
-        res.body.should.be.a('array');
+        res.body.should.be.a('object');
         should.not.exist(error);
         should.exist(res);
       });

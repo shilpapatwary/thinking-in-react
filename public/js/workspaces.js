@@ -257,6 +257,7 @@ export default class Workspaces {
 
     window.addEventListener('load', () => {
       this.loadAllWorkspaces();
+      document.getElementById('workspaceHeader').click();
     });
   }
 }

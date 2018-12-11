@@ -1,3 +1,40 @@
+App Details:
+
+Login @ - localhost:3000/auth/login
+REgister @ - localhost:3000/auth/login
+
+Open workspaces @ localhost:3000/workspaces.html
+click on workspaces to view the list of workspaces
+click on add a workspace to create a new workspace
+
+click on name of workspace to edit it and click on edit icon to save the updated name
+click on addUSer icon to add a new user to workspace
+click on delete icon to delete the workspace
+click on add + icon to add a chaanle in the workspace
+Click on enter icon to open the channels of the workspace
+
+Ente the name of user in the input box and click on add user icon to add the user
+Click on users icon to view the list of users in the channel
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Assignment - Week 5
 
 Submission date : 26th Nov

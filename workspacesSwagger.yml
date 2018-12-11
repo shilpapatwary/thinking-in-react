@@ -41,6 +41,8 @@ paths:
       tags:
         - Workspaces
       summary: Finds all Workspaces
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: successful operation
@@ -79,7 +81,7 @@ paths:
     delete:
       tags:
         - Workspaces
-      summary: Deletes a board
+      summary: Deletes a workspace
       description: ''
       parameters:
         - name: id

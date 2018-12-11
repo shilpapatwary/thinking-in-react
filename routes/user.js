@@ -30,7 +30,8 @@ router.route('/login').get((req, res, next) => {
       if (e) throw err;
       if (isMatch) {
         const token = jwt.sign(JSON.parse(JSON.stringify(user)), secret, { expiresIn: 600000 });
-        res.cookie('accessToken', token).send('You are logged in!');
+        res.set('Authorization', `Bearer ${token}`);
+        res.cookie('accessToken', token).send({ message: 'You are logged in!', token });
       } else {
         return res.json('password does not match');
       }
@@ -53,7 +54,7 @@ router.route('/register').get((req, res, next) => {
         throw err;
       } else {
         res.set('Content-Type', 'text/html');
-        res.status(201).send('registered successfully');
+        res.status(201).send({ message: 'registered successfully' });
       }
     });
   } catch (e) {

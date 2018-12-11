@@ -2,7 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
-const jsonServer = require('json-server');
+// const jsonServer = require('json-server');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -18,15 +19,16 @@ const boardsRouter = require('./routes/boards');
 const workspacesRouter = require('./routes/workspaces');
 const channelsRouter = require('./routes/channels');
 const userRouter = require('./routes/user');
+const homeRouter = require('./routes/home');
 
 const port = process.env.PORT || 3000;
 
-const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'db.json'));
-const jsonMiddlewares = jsonServer.defaults();
+// const jsonRoutes = jsonServer.router(path.resolve(__dirname, 'db.json'));
+// const jsonMiddlewares = jsonServer.defaults();
 
-app.use('/api/', jsonMiddlewares);
-app.use('/api/', jsonRoutes);
-
+// app.use('/api/', jsonMiddlewares);
+// app.use('/api/', jsonRoutes);
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyparser.urlencoded({
   extended: true,
@@ -44,6 +46,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use('/', homeRouter);
 app.use('/auth', userRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/boards', boardsRouter);
