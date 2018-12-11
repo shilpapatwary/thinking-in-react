@@ -18,17 +18,27 @@ function loginUser() {
 }
 
 mocha.describe('Slack Application', () => {
-  mocha.before((done) => {
-    loginUser();
-    done();
+  let token = null;
+  before((done) => {
+    request.agent(app)
+      .post('/auth/login')
+      .send({
+        username: 'shilpap',
+        password: '12345',
+      })
+      .end((err, response) => {
+        token = response.body.token;
+        done();
+      });
   });
   mocha.it('should retrieve all workspaces', () => {
     request(app)
       .get('/api/workspaces/')
+      .set('Authorization', `Bearer ${token}`)
       .expect('content-type', /json/)
       .expect(200)
       .end((error, res) => {
-        res.body.should.be.a('object');
+        res.body.should.be.a('Array');
         should.not.exist(error);
         should.exist(res);
       });
@@ -36,6 +46,7 @@ mocha.describe('Slack Application', () => {
   mocha.it('should retrieve a single workspace', () => {
     request(app)
       .get('/api/workspaces/23140')
+      .set('Authorization', `Bearer ${token}`)
       .expect('content-type', /json/)
       .expect(200)
       .end((error, res) => {
@@ -53,6 +64,7 @@ mocha.describe('Slack Application', () => {
     workspace.save((err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
           id: '12345',
           name: 'workspace_new',
@@ -76,6 +88,7 @@ mocha.describe('Slack Application', () => {
     workspace.save((err, ws) => {
       request(app)
         .delete(`/api/workspaces/${ws.id}`)
+        .set('Authorization', `Bearer ${token}`)
         .expect('content-type', /json/)
         .expect(200)
         .end((error, res) => {
@@ -88,6 +101,7 @@ mocha.describe('Slack Application', () => {
   mocha.it('should create a workspace', () => {
     request(app)
       .post('/api/workspaces/')
+      .set('Authorization', `Bearer ${token}`)
       .send({
         id: `${Math.floor(Math.random() * 100000)}`,
         name: 'corporate_social',
@@ -124,6 +138,7 @@ mocha.describe('Slack Application', () => {
     workspace.save((err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}/users`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
           id: '12345',
           name: 'Shilpa',
@@ -148,6 +163,7 @@ mocha.describe('Slack Application', () => {
     workspace.save((err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}/channels`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
           id: '12345',
           name: 'channel1',
@@ -172,6 +188,7 @@ mocha.describe('Slack Application', () => {
     channel.save((err, ch) => {
       request(app)
         .put(`/api/channels/${ch.id}/users`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
           id: '98888',
           name: 'user1',
@@ -196,6 +213,7 @@ mocha.describe('Slack Application', () => {
     channel.save((err, ch) => {
       request(app)
         .put(`/api/channels/${ch.id}/messages`)
+        .set('Authorization', `Bearer ${token}`)
         .send({
           id: '12345',
           message: 'hi',
