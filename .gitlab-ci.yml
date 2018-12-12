@@ -35,4 +35,4 @@ heroku-deployment:
     script:
      - npm install --production
      - (echo "machine git.heroku.com"; echo " username shilpa.patwary13@gmail.com"; echo " password $HEROKU_PASSWORD") > ~/.netrc
-     - git push https://git.heroku.com/flexbox-ajax-18112018.git HEAD:master
+     - git push https://git.heroku.com/socket-io-12122018.git HEAD:master

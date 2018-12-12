@@ -1,5 +1,8 @@
 App Details:
 
+passport-mocha-12112018
+
+Homepage: localhost:3000
 Login @ - localhost:3000/auth/login
 REgister @ - localhost:3000/auth/login
 
