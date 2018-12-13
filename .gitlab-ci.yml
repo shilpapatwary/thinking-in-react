@@ -9,6 +9,13 @@ cache:
   paths:
     - node_modules/
 
+services:
+  - mongo:latest
+
+variables:
+  MONGO_URI: 'mongodb://mongo/passportdb'
+  NODE_ENV: 'test'
+
 install-dependencies:
   stage: build
   script: 
@@ -23,3 +30,9 @@ lint-checks:
     - npm run lint
 
 # write the heroku-deployment job here
+heroku-deployment:
+    stage: deploy
+    script:
+     - npm install --production
+     - (echo "machine git.heroku.com"; echo " username shilpa.patwary13@gmail.com"; echo " password $HEROKU_PASSWORD") > ~/.netrc
+     - git push https://git.heroku.com/socket-io-12122018.git HEAD:master

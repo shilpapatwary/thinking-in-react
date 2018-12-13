@@ -1,0 +1,100 @@
+{
+  "workspaces": [
+    {
+      "id": "23140",
+      "name": "workspace1",
+      "users": [
+        {
+          "id": "user74678",
+          "name": "patwary"
+        },
+        {
+          "id": "user17475",
+          "name": "kedar"
+        },
+        {
+          "id": "user73862",
+          "name": "shilpa"
+        }
+      ],
+      "channels": [
+        {
+          "id": "channel94416",
+          "name": "#general",
+          "users": []
+        },
+        {
+          "id": "channel64695",
+          "name": "random",
+          "users": []
+        },
+        {
+          "id": "channel94416",
+          "wid": "123456",
+          "name": "#general",
+          "users": [],
+          "messages": [
+            {
+              "message": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "66782",
+      "name": "workspace2",
+      "users": [
+        {
+          "id": "user46912",
+          "name": "shilpa"
+        },
+        {
+          "id": "user5911",
+          "name": "patwary"
+        }
+      ],
+      "channels": [
+        {
+          "id": "channel91497",
+          "wid": "66782",
+          "name": "#group1",
+          "users": []
+        }
+      ]
+    },
+    {
+      "id": "37473",
+      "name": "workspace3",
+      "users": [],
+      "channels": [
+        {
+          "id": "channel76076",
+          "wid": "37473",
+          "name": "#general",
+          "users": []
+        },
+        {
+          "id": "channel79994",
+          "wid": "37473",
+          "name": "random",
+          "users": []
+        }
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "id": "channel94416",
+      "wid": "123456",
+      "name": "#general",
+      "users": [],
+      "messages": []
+    },
+    {
+      "id": "channel64695",
+      "name": "random",
+      "users": []
+    }
+  ]
+}
