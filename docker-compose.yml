@@ -1,0 +1,29 @@
+version: '3'
+services:
+  fsd-app:
+    image: fsd-app:1.0
+    build: .
+    ports:
+      - "3000"
+    labels: 
+      - "traefik.frontend.rule=Host:http://192.168.99.100"
+    depends_on:
+     - mongo
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:4.0.4
+    ports:
+      - "27017:27017"
+  reverse-proxy:
+    image: traefik
+    command: --api --docker
+    ports:
+      - "80:80"     # The HTTP port
+      - "8080:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  
+ 
+    
