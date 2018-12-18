@@ -3,6 +3,7 @@
 const express = require('express');
 const path = require('path');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
 const User = require('../model/userModel');
 
@@ -61,5 +62,15 @@ router.route('/register').get((req, res, next) => {
     next(e);
   }
 });
+
+router.route('/authenticate').get((req, res, next) => {
+  try {
+    res.set('Content-Type', 'text/html');
+    res.status(201).sendFile(path.join(__dirname, '../public/views/authenticate.html'));
+  } catch (e) {
+    next(e);
+  }
+})
+  .post(passport.authenticate('local', { successRedirect: '/trello' }));
 
 module.exports = router;

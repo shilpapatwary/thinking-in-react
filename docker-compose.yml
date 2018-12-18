@@ -6,19 +6,28 @@ services:
     ports:
       - "3000"
     labels: 
-      - "traefik.frontend.rule=Host:http://192.168.99.100"
+      - "traefik.backend=backend-fsd-app-06scalableauthwithdocker"
+      - "traefik.frontend.rule=Host:fsd-app.example.com"
+      - "traefik.enable=true"
+    environment:
+      - REDIS_HOST: redis
     depends_on:
      - mongo
     links:
       - mongo
+      - redis
   mongo:
     container_name: mongo
     image: mongo:4.0.4
     ports:
       - "27017:27017"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
   reverse-proxy:
     image: traefik
-    command: --api --docker
+    command: --api --docker --docker.domain=docker.localhost --logLevel=DEBUG
     ports:
       - "80:80"     # The HTTP port
       - "8080:8080" # The Web UI (enabled by --api)
