@@ -1,3 +1,19 @@
+To test:
+
+scaling sessionless authorization : localhost:3000/
+scaling session based authentication: localhost:3000/trelloHome/
+
+
+
+
+
+
+
+
+
+
+
+
 Assignment - Week 5
 
 Submission date : 10th Dec

@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const session = require('express-session');
 const cookieSession = require('cookie-session');
-// const jsonServer = require('json-server');
 const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');

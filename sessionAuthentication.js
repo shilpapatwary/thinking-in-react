@@ -1,10 +1,10 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-undef */
 const passport = require('passport');
 const Local = require('passport-local').Strategy;
 const user = require('./model/userModel');
 
 passport.use(new Local((uname, password, done) => {
-  console.log(uname);
   user.findOne({ username: uname }, (err, usr) => {
     if (err) { return done(err); }
     if (!usr) { return done(null, false, { message: 'incorrect username' }); }
