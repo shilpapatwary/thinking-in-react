@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/').get((req, res, next) => {
   try {
     res.set('Content-Type', 'text/html');
-    res.status(201).sendFile(path.join(__dirname, '../public/trelloHome.html'));
+    res.status(201).sendFile(path.join(__dirname, '../public/boards.html'));
   } catch (e) {
     next(e);
   }

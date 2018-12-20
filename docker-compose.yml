@@ -6,10 +6,9 @@ services:
     ports:
       - "3000"
     labels: 
-      - "traefik.backend=backend-fsd-app-06scalableauthwithdocker"
       - "traefik.frontend.rule=Host:fsd-app.example.com"
-      - "traefik.enable=true"
     environment:
+      - MONGOLAB_URI: mongodb://mongo:27017/myappdb
       - REDIS_HOST: redis
     depends_on:
      - mongo
