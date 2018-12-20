@@ -4,11 +4,12 @@ services:
     image: fsd-app:1.0
     build: .
     ports:
-      - "3000"
+      - "3000:3000"
+    environment:
+      - 'REDIS_HOST=redis'
+      - 'MONGOLAB_URI=mongodb://mongo:27017/myappdb'
     labels: 
       - "traefik.frontend.rule=Host:fsd-app.example.com"
-    environment:
-      - REDIS_HOST: redis
     depends_on:
      - mongo
     links:
@@ -25,7 +26,7 @@ services:
       - "6379:6379"
   reverse-proxy:
     image: traefik
-    command: --api --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    command: --api --docker
     ports:
       - "80:80"     # The HTTP port
       - "8080:8080" # The Web UI (enabled by --api)
