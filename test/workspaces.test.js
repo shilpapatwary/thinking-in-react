@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
+/* eslint-disable prefer-destructuring */
 const request = require('supertest');
 const chai = require('chai');
 const mocha = require('mocha');
@@ -7,28 +11,26 @@ const Channels = require('../model/channelModel');
 
 const should = chai.should();
 
-function loginUser() {
-  return request(app)
-    .post('/auth/login')
-    .type('form')
-    .send({
-      username: 'shilpap',
-      password: '12345',
-    });
-}
-
 mocha.describe('Slack Application', () => {
   let token = null;
   before((done) => {
     request.agent(app)
-      .post('/auth/login')
+      .post('/auth/register')
       .send({
-        username: 'shilpap',
-        password: '12345',
+        username: 'test',
+        password: 'test123',
       })
-      .end((err, response) => {
-        token = response.body.token;
-        done();
+      .end((_err, response) => {
+        request.agent(app)
+          .post('/auth/login')
+          .send({
+            username: 'test',
+            password: 'test123',
+          })
+          .end((_err, res) => {
+            token = res.body.token;
+            done();
+          });
       });
   });
   mocha.it('should retrieve all workspaces', () => {
@@ -44,16 +46,23 @@ mocha.describe('Slack Application', () => {
       });
   });
   mocha.it('should retrieve a single workspace', () => {
-    request(app)
-      .get('/api/workspaces/23140')
-      .set('Authorization', `Bearer ${token}`)
-      .expect('content-type', /json/)
-      .expect(200)
-      .end((error, res) => {
-        res.body.should.be.a('object');
-        should.not.exist(error);
-        should.exist(res);
-      });
+    const updatedWorkspace = {
+      id: `${Math.floor(Math.random() * 100000)}`,
+      name: 'workspace_old',
+    };
+    const workspace = new Workspaces(updatedWorkspace);
+    workspace.save((_err, ws) => {
+      request(app)
+        .get(`/api/workspaces/${ws.id}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect('content-type', /json/)
+        .expect(200)
+        .end((error, res) => {
+          res.body.should.be.a('object');
+          should.not.exist(error);
+          should.exist(res);
+        });
+    });
   });
   mocha.it('should update a workspace', () => {
     const updatedWorkspace = {
@@ -61,7 +70,7 @@ mocha.describe('Slack Application', () => {
       name: 'workspace_old',
     };
     const workspace = new Workspaces(updatedWorkspace);
-    workspace.save((err, ws) => {
+    workspace.save((_err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -85,7 +94,7 @@ mocha.describe('Slack Application', () => {
       name: 'workspace_new',
     };
     const workspace = new Workspaces(newWorkspace);
-    workspace.save((err, ws) => {
+    workspace.save((_err, ws) => {
       request(app)
         .delete(`/api/workspaces/${ws.id}`)
         .set('Authorization', `Bearer ${token}`)
@@ -135,7 +144,7 @@ mocha.describe('Slack Application', () => {
       channels: [],
     };
     const workspace = new Workspaces(newWorkspace);
-    workspace.save((err, ws) => {
+    workspace.save((_err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}/users`)
         .set('Authorization', `Bearer ${token}`)
@@ -160,7 +169,7 @@ mocha.describe('Slack Application', () => {
       channels: [],
     };
     const workspace = new Workspaces(newWorkspace);
-    workspace.save((err, ws) => {
+    workspace.save((_err, ws) => {
       request(app)
         .put(`/api/workspaces/${ws.id}/channels`)
         .set('Authorization', `Bearer ${token}`)
@@ -185,7 +194,7 @@ mocha.describe('Slack Application', () => {
       messages: [],
     };
     const channel = new Channels(newChannel);
-    channel.save((err, ch) => {
+    channel.save((_err, ch) => {
       request(app)
         .put(`/api/channels/${ch.id}/users`)
         .set('Authorization', `Bearer ${token}`)
@@ -210,7 +219,7 @@ mocha.describe('Slack Application', () => {
       messages: [],
     };
     const channel = new Channels(newChannel);
-    channel.save((err, ch) => {
+    channel.save((_err, ch) => {
       request(app)
         .put(`/api/channels/${ch.id}/messages`)
         .set('Authorization', `Bearer ${token}`)

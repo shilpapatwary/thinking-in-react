@@ -12,10 +12,6 @@ cache:
 services:
   - mongo:latest
 
-variables:
-  MONGO_URI: 'mongodb://mongo/passportdb'
-  NODE_ENV: 'test'
-
 install-dependencies:
   stage: build
   script: 
@@ -28,6 +24,10 @@ lint-checks:
   stage: test
   script: 
     - npm run lint
+unit-tests:
+  stage: test
+  script: 
+    - npm run test
 
 # write the heroku-deployment job here
 heroku-deployment:
