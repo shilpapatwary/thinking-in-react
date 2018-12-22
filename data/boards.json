@@ -1,0 +1,88 @@
+[
+    {
+        "id":"5bdaeff0bee9dc6b70afed0d",
+        "name":"board2",
+        "desc":"",
+        "descData":null,
+        "closed":false,
+        "idOrganization":null,
+        "pinned":false,
+        "url":"https://trello.com/b/elaSIRX4/name",
+        "shortUrl":"https://trello.com/b/elaSIRX4",
+        "prefs":{},
+        "labelNames":{},
+        "limits":{},
+        "lists": [{
+            "id": "560bf446f17023a3710658fb",
+            "name": "Alaska",
+            "closed": false,
+            "pos": 65535,
+            "cards":[{
+                "id": "560bf4dd7139286471dc009c",
+                "name": "Grand Canyon National Park",
+                "badges": {},
+                "labels": []
+              }]
+          }]
+    },
+    {
+        "id":"5bdaeff0bee9dc6b70afed34",
+        "name":"board3",
+        "desc":"",
+        "descData":null,
+        "closed":false,
+        "idOrganization":null,
+        "pinned":false,
+        "url":"https://trello.com/b/elaSIRX4/name",
+        "shortUrl":"https://trello.com/b/elaSIRX4",
+        "prefs":{},
+        "labelNames":{},
+        "limits":{},
+        "lists": []
+    },
+    {
+        "id":"5bdaeff0bee9dc6b70afed56",
+        "name":"board4",
+        "desc":"",
+        "descData":null,
+        "closed":false,
+        "idOrganization":null,
+        "pinned":false,
+        "url":"https://trello.com/b/elaSIRX4/name",
+        "shortUrl":"https://trello.com/b/elaSIRX4",
+        "prefs":{},
+        "labelNames":{},
+        "limits":{},
+        "lists": []
+    },
+    {
+        "id":"5bdaeff0bee9dc6b70afed89",
+        "name":"board5",
+        "desc":"",
+        "descData":null,
+        "closed":false,
+        "idOrganization":null,
+        "pinned":false,
+        "url":"https://trello.com/b/elaSIRX4/name",
+        "shortUrl":"https://trello.com/b/elaSIRX4",
+        "prefs":{},
+        "labelNames":{},
+        "limits":{},
+        "lists": []
+    },
+    {
+        "id":"5bdaeff0bee9dc6b70afe7u0",
+        "name":"board1",
+        "desc":"",
+        "descData":null,
+        "closed":false,
+        "idOrganization":null,
+        "pinned":false,
+        "url":"https://trello.com/b/elaSIRX4/name",
+        "shortUrl":"https://trello.com/b/elaSIRX4",
+        "prefs":{},
+        "labelNames":{},
+        "limits":{},
+        "lists": []
+    }
+]

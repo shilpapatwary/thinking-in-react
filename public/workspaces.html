@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CHATAPP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./lib/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/workspaces.css" />
+    
+</head>
+<body>
+    
+    <section id="workspaceParentContainer">
+            <header>
+                    <section id="workspaceHeader"><h2>My Workspaces</h2></section>
+                </header>
+            <section id="content">
+                    <section id="workspaces" class="hidden">
+                            <ul id="workspaceContainer">
+                                <li id="addWorkspace" class="workspace">+ Add a workspace</li>
+                            </ul>
+                    </section>
+            </section>
+            <section class="hidden" id="addUserForm">
+                <form id="addUserToWorkspace">
+                    <input type="text" id="workspaceUser" class="userInput" placeholder="User Name">
+                    <input type="submit" id="submitWorkspaceUser">
+                </form>
+            </section>
+            <section class="hidden" id="addChannelForm">
+                <form id="addChannelToWorkspace">
+                    <input type="text" id="workspaceChannel" class="channelInput" placeholder="Channel Name">
+                    <input type="submit" id="submitWorkspaceChannel">
+                </form>
+            </section>
+    </section>
+
+    <section id="channelParentContainer" class="hidden">
+        <header>
+            <section><h2>channels</h2></section>
+        </header>
+        <section class="mainSection">
+            <div class="channelsSection">
+                    <ul id="channelsContainer">
+                    </ul>
+                </div>
+            <div class="messageSection" id="msgSec">
+            </div>
+            
+        </section>
+        <section id="userListDialog" class="hidden"></section>
+    </section>
+    
+   
+    <footer>
+        <section></section>
+    </footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../dist/bundle.js"></script>
+</body>
+</html>
+
+
