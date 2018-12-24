@@ -21,7 +21,7 @@ class Lists  extends Component {
             <div className="boardLists">
                 {
                 this.state.lists.map(list => {
-                        return  <div id={list.id} className="list">
+                        return  <div id={list.id} key={list.id} className="list">
                                     <div className="listTitle">List1</div>
                                     <div className="addCard">+ Add card</div>
                                 </div>

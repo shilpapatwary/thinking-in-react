@@ -8,14 +8,15 @@ class BoardContainer  extends Component {
             boards: props.boards
         }
         this.setSelectedBoard = this.setSelectedBoard.bind(this);
-    }
-
-    updateBoardName(event) {
-        console.log(event.target.id);
+        this.updateSelectedBoard = this.updateSelectedBoard.bind(this);
     }
 
     setSelectedBoard(board){
         this.props.setSelectedBoard(board);
+    }
+
+    updateSelectedBoard(board) {
+        this.props.updateBoard(board);
     }
     
     render(props) {
@@ -24,7 +25,8 @@ class BoardContainer  extends Component {
             <ul id="boardsContainer">
             {
             this.state.boards.map(board => {
-                return <Board board={board} key={board.id} onBoardSelect={this.setSelectedBoard}/>
+                return <Board board={board} key={board.id} 
+                showSuccess={this.props.showSuccess} onBoardSelect={this.setSelectedBoard} onBoardUpdate={this.updateSelectedBoard}/>
             })
             }  
             </ul>

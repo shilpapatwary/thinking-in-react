@@ -14,14 +14,28 @@ class Home  extends Component {
       showLists: false
     };
     this.setSelectedBoard = this.setSelectedBoard.bind(this);
+    this.updateBoard = this.updateBoard.bind(this);
   }
 
   setSelectedBoard(board) {
     this.setState({
       selectedBoard: board,
       showBoards: false,
-      showLists: true
+      showLists: true,
+      showSuccess: false
     });
+  }
+
+  updateBoard(board) {
+    const bid = board.id;
+    const boardIndex = this.state.boards.findIndex(b => b.id === bid);
+    if(boardIndex){
+      data.boards[boardIndex] = board;
+      this.setState({boards: data.boards, showSuccess:true});
+      setTimeout(() => {
+        this.setState({showSuccess:false});
+      },3000);
+    }
   }
     render() {
       return (
@@ -31,7 +45,9 @@ class Home  extends Component {
             <section className="addboard"><span className="info">Create a Board</span><span id="createBoardIcon">+</span></section>
           </header>
           <section id="content">
-            { this.state.showBoards ? <BoardContainer boards={this.state.boards} setSelectedBoard={this.setSelectedBoard}></BoardContainer> : null}
+            { this.state.showBoards ? <BoardContainer boards={this.state.boards} setSelectedBoard={this.setSelectedBoard} 
+            showSuccess={this.state.showSuccess} updateBoard={this.updateBoard}>
+            </BoardContainer> : null}
             { this.state.showLists ? <ListContainer board={this.state.selectedBoard}></ListContainer> : null }
           </section>
         </div>
