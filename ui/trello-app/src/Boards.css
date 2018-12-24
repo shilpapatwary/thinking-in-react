@@ -1,0 +1,149 @@
+body, h2{
+  margin:0;
+}
+header {
+height:50px;
+text-align: center;
+background-color: gray;
+line-height:50px;
+color:#ffffff;
+display:flex;
+justify-content:space-between;
+}
+header section{
+  margin-left:10px;
+}
+.addboard{
+ cursor: pointer;
+  font-weight: bold;
+  font-size:60px;
+  margin-right:40px;
+}
+ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:0;
+}
+.board{
+  width:250px;
+  height:100px;
+  list-style: none;
+  border:1px solid #000000;
+  margin:10px;
+  background-color: #3267a4;
+  color:#ffffff;
+  cursor: pointer;
+}
+.info{
+  display: none;
+  color:#ffffff;
+  font-size:15px;
+}
+#addboardsIcon:hover .info{
+  display:block;
+}
+.boardHeader{
+  display: flex;
+  justify-content: space-between;
+  padding:0 10px 0 10px;
+  height:25px;
+  line-height: 25px;
+}
+.deleteboard{
+  cursor: pointer;
+}
+input, textarea{
+  border:0;
+  width:100%;
+}
+input:focus,textarea:focus{
+outline: none;
+}
+.updateboard{
+  width: 8%;
+  height: 16px;
+  float: right;
+  cursor: pointer;
+  border: 1px solid #cccccc;
+  background-color: #00bcd4;
+  color: #ffffff;
+  text-align: center;
+  margin-right: 5px;
+  margin-top: 3px;
+  font-size: 14px;
+  line-height: 17px;
+}
+.boardTitle{
+color: #ffffff;
+  background-color: #3267a4;
+  width: 85%;
+}
+.updateboard{
+  flex-grow:1;
+}
+.success{
+  background-color: #8bc34a;
+}
+.boardBody{
+  height:75px;
+}
+.listTitle{
+  text-align: center;
+  padding:3%;
+}
+.list{
+  width: 25%;
+  border: 1px solid #03a9f4;
+  margin: 2%;
+  background-color: aliceblue;
+}
+.addCard{
+  padding:2%;
+  color: darkgray;
+  cursor: pointer;
+}
+.addCard:hover{
+  color:black;
+}
+.card{
+  width: 95%;
+  height: 50px;
+  border: 1px solid #607D8B;
+  margin: 2%;
+  background-color: #9e9e9e30;
+  text-align: center;
+}
+.breadcrumb{
+  margin:2%;
+  cursor:pointer;
+}
+.cardTitle{
+  line-height: 50px;
+}
+.hidden{
+  display:none;
+}
+
+#addListForm.hidden{
+  display:none;
+}
+.addList{
+  margin:2%;
+  color:blue;
+  cursor:pointer;
+  display:flex;
+}
+#addListForm{
+  display:flex;
+  margin-left:2%;
+}
+#addListForm input{
+  background-color: #faebd7;
+  margin-right:2%;
+  border:1px solid #ffc0cb;
+}
+.boardLists{
+  display: flex;
+  flex-wrap: wrap;
+}

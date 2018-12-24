@@ -1,0 +1,36 @@
+{
+    "boards": [
+        {
+            "id":"5bdaeff0bee9dc6b70afed0d",
+            "name":"board2",
+            "lists": [{
+                "id": "560bf446f17023a3710658fb",
+                "name": "Alaska",
+                "cards":[{
+                    "id": "560bf4dd7139286471dc009c",
+                    "name": "Grand Canyon National Park"
+                  }]
+              }]
+        },
+        {
+            "id":"5bdaeff0bee9dc6b70afed34",
+            "name":"board3",
+            "lists": []
+        },
+        {
+            "id":"5bdaeff0bee9dc6b70afed56",
+            "name":"board4",
+            "lists": []
+        },
+        {
+            "id":"5bdaeff0bee9dc6b70afed89",
+            "name":"board5",
+            "lists": []
+        },
+        {
+            "id":"5bdaeff0bee9dc6b70afe7u0",
+            "name":"board1",
+            "lists": []
+        }
+    ]
+}
