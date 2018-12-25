@@ -18,7 +18,7 @@ class Board  extends Component {
 
     updateBoardName(event) {
         const updateBoard = this.state.board;
-        updateBoard.name =  document.getElementById(`{boardTitle${this.state.board.id}}`);
+        updateBoard.name =  document.getElementById(`boardTitle${this.state.board.id}`).value;
         this.props.onBoardUpdate(updateBoard);
     }
 

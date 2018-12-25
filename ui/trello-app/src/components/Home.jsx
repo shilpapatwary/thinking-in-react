@@ -15,6 +15,9 @@ class Home  extends Component {
     };
     this.setSelectedBoard = this.setSelectedBoard.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
+    this.addListToWorkspace = this.addListToWorkspace.bind(this);
+    this.showBoards = this.showBoards.bind(this);
+    this.addCardToList = this.addCardToList.bind(this);
   }
 
   setSelectedBoard(board) {
@@ -37,6 +40,30 @@ class Home  extends Component {
       },3000);
     }
   }
+
+  addListToWorkspace(bid, list) {
+    const boardIndex = data.boards.findIndex(b => b.id === bid);
+    if(boardIndex >=0){
+      data.boards[boardIndex].lists.push(list);
+      this.setState({boards: data.boards});
+    }
+  }
+
+  addCardToList(lid, bid, card) {
+    const boardIndex = data.boards.findIndex(b => b.id === bid);
+    if(boardIndex >= 0) {
+      const listIndex = data.boards[boardIndex].lists.findIndex(l => l.id = lid);
+      if(listIndex >=0) {
+        data.boards[boardIndex].lists[listIndex].cards.push(card);
+        this.setState({boards: data.boards});
+      }
+    }
+  }
+
+  showBoards() {
+    this.setState({ showBoards: true,
+      showLists: false});
+  }
     render() {
       return (
         <div className="rootContainer">
@@ -48,7 +75,7 @@ class Home  extends Component {
             { this.state.showBoards ? <BoardContainer boards={this.state.boards} setSelectedBoard={this.setSelectedBoard} 
             showSuccess={this.state.showSuccess} updateBoard={this.updateBoard}>
             </BoardContainer> : null}
-            { this.state.showLists ? <ListContainer board={this.state.selectedBoard}></ListContainer> : null }
+            { this.state.showLists ? <ListContainer board={this.state.selectedBoard} onAddList = {this.addListToWorkspace} showBoards={this.showBoards} addCardToList={this.addCardToList}></ListContainer> : null }
           </section>
         </div>
       );
