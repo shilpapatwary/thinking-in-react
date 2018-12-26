@@ -15,9 +15,11 @@ class Home  extends Component {
     };
     this.setSelectedBoard = this.setSelectedBoard.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
-    this.addListToWorkspace = this.addListToWorkspace.bind(this);
+    this.addListToBoard = this.addListToBoard.bind(this);
     this.showBoards = this.showBoards.bind(this);
     this.addCardToList = this.addCardToList.bind(this);
+    this.editListName = this.editListName.bind(this);
+    this.editCardName = this.editCardName.bind(this);
   }
 
   setSelectedBoard(board) {
@@ -41,18 +43,18 @@ class Home  extends Component {
     }
   }
 
-  addListToWorkspace(bid, list) {
-    const boardIndex = data.boards.findIndex(b => b.id === bid);
+  addListToBoard(list) {
+    const boardIndex = data.boards.findIndex(b => b.id === this.state.selectedBoard.id);
     if(boardIndex >=0){
       data.boards[boardIndex].lists.push(list);
       this.setState({boards: data.boards});
     }
   }
 
-  addCardToList(lid, bid, card) {
-    const boardIndex = data.boards.findIndex(b => b.id === bid);
+  addCardToList(lid, card) {
+    const boardIndex = data.boards.findIndex(b => b.id === this.state.selectedBoard.id);
     if(boardIndex >= 0) {
-      const listIndex = data.boards[boardIndex].lists.findIndex(l => l.id = lid);
+      const listIndex = data.boards[boardIndex].lists.findIndex(l => l.id === lid);
       if(listIndex >=0) {
         data.boards[boardIndex].lists[listIndex].cards.push(card);
         this.setState({boards: data.boards});
@@ -63,6 +65,31 @@ class Home  extends Component {
   showBoards() {
     this.setState({ showBoards: true,
       showLists: false});
+  }
+
+  editListName(lid, listName) {
+    const boardIndex = data.boards.findIndex(b => b.id === this.state.selectedBoard.id);
+    if(boardIndex >= 0) {
+      const listIndex = data.boards[boardIndex].lists.findIndex(l => l.id === lid);
+      if(listIndex >=0) {
+        data.boards[boardIndex].lists[listIndex].name = listName;
+        this.setState({boards: data.boards});
+      }
+    }
+  }
+
+  editCardName(lid, cid, name) {
+    const boardIndex = data.boards.findIndex(b => b.id === this.state.selectedBoard.id);
+    if(boardIndex >= 0) {
+      const listIndex = data.boards[boardIndex].lists.findIndex(l => l.id === lid);
+      if(listIndex >=0) {
+        const cardIndex = data.boards[boardIndex].lists[listIndex].cards.findIndex(c => c.id === cid);
+        if(cardIndex >= 0) {
+          data.boards[boardIndex].lists[listIndex].cards[cardIndex].name = name;
+          this.setState({boards: data.boards});
+        }
+      }
+    }
   }
     render() {
       return (
@@ -75,7 +102,7 @@ class Home  extends Component {
             { this.state.showBoards ? <BoardContainer boards={this.state.boards} setSelectedBoard={this.setSelectedBoard} 
             showSuccess={this.state.showSuccess} updateBoard={this.updateBoard}>
             </BoardContainer> : null}
-            { this.state.showLists ? <ListContainer board={this.state.selectedBoard} onAddList = {this.addListToWorkspace} showBoards={this.showBoards} addCardToList={this.addCardToList}></ListContainer> : null }
+            { this.state.showLists ? <ListContainer board={this.state.selectedBoard} onAddList = {this.addListToBoard} showBoards={this.showBoards} addCardToList={this.addCardToList} onlistNameEdited={this.editListName} editCardName={this.editCardName}></ListContainer> : null }
           </section>
         </div>
       );

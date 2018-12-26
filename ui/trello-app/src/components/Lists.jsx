@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import List from './List';
 
 class Lists  extends Component {
     constructor(props) {
@@ -7,33 +7,34 @@ class Lists  extends Component {
         this.state = {
             lists: props.lists
         }
-        this.addListToWorkspace = this.addListToWorkspace.bind(this);
-        this.addCardToList = this.addCardToList.bind(this);
+        this.selectedList = '';
+        this.addListToBoard = this.addListToBoard.bind(this);
+        this.setListId = this.setListId.bind(this);
+        this.setListName = this.setListName.bind(this);
     }
 
-    addListToWorkspace(event) {
-        const wid = event.target.closest('.listSection').id;
+    addListToBoard(event) {
         const newList = {
             id: Math.floor(Math.random() * 100000),
-            name: 'sample List'
+            name: 'sample List',
+            cards:[]
         }
-        this.props.addListToWorkspace(wid, newList);
+        this.props.addListToBoard(newList);
     }
 
-    addCardToList(event) {
-        const listId = event.target.closest('.list').id;
-        const boardId = event.target.closest('.listSection').id;
-        this.props.addCardToList(listId, boardId, {
-            id: Math.floor(Math.random() * 100000),
-            name: ' sample card'
-        });
+    setListName(e) {
+        this.setState({listName: e.target.value});
+    }
+
+    setListId(event) {
+        this.setState({selectedList: event.target.closest('.list').id});
     }
 
     render(props) {
       return (
         <div>
              <div className="addList">
-                <span id="addList" onClick={this.addListToWorkspace}>+ Add a list</span>
+                <span id="addList" onClick={this.addListToBoard}>+ Add a list</span>
                     <form id="addListForm" className="hidden">
                     <input id="listTitle" type="text" name="listTitle" defaultValue=""/>
                         <button className="listSubmit">Submit</button>
@@ -41,16 +42,8 @@ class Lists  extends Component {
             </div>
             <div className="boardLists">
                 {
-                this.state.lists.map(list => {
-                        return  <div id={list.id} key={list.id} className="list">
-                                    <div className="listTitle">{list.name}</div>
-                                    <div className="cards">{
-                                        list.cards.map( (card) => {
-                                            return <Card card={card}></Card>
-                                        })
-                                    }</div>
-                                    <div className="addCard" onClick={this.addCardToList}>+ Add card</div>
-                                </div>
+                this.state.lists.map( (list, index) => {
+                        return  <List key={index} list={list} addCardToList={this.props.addCardToList} editListName={this.props.editListName} editCardName={this.props.editCardName}></List>
                     })
                 }      
             </div>
