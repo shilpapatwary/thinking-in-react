@@ -1,28 +1,50 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './Slack.css';
+import 'font-awesome/css/font-awesome.min.css'
+import WorkspaceContainer from './components/WorkspaceContainer';
+import ChannelCointainer from './components/ChannelsContainer';
+
+const data = require('./data.json');
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      workspaces: data.workspaces,
+      channels:[],
+      showWorkspaces: true,
+      showChannels: false
+    };
+    this.openWorkspace = this.openWorkspace.bind(this);
+    this.showWorkspaces = this.showWorkspaces.bind(this);
+  }
+
+  showWorkspaces() {
+    this.setState({showWorkspaces: true,
+      showChannels: false});
+  }
+  openWorkspace(wid){
+    const workspaceIndex = data.workspaces.findIndex(w => w.id === wid);
+    if(workspaceIndex >= 0){
+      const channels = data.workspaces[workspaceIndex].channels;
+      this.setState({channels: channels, showWorkspaces: false,
+        showChannels: true});
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <div>
+      <section id="workspaceParentContainer">
+        {this.state.showWorkspaces && <WorkspaceContainer workspaces={this.state.workspaces} openWorkspace={this.openWorkspace}></WorkspaceContainer>}
+      </section>
+      <section id="channelParentContainer">
+        {this.state.showChannels && <ChannelCointainer channels={this.state.channels} showWorkspaces={this.showWorkspaces}></ChannelCointainer>}
+      </section>
+    </div>
     );
   }
 }
 
 export default App;
+ 

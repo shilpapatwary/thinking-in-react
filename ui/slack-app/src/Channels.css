@@ -1,0 +1,113 @@
+ /* Channels============================================================================================ */
+ body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow:hidden;
+}
+header {
+  height:50px;
+  text-align: center;
+  background-color: gray;
+  line-height:50px;
+  color:#ffffff;
+  display:flex;
+  justify-content:space-between;
+}
+header section{
+    margin-left:10px;
+}
+.addchannel{
+   cursor: pointer;
+    font-weight: bold;
+    font-size:60px;
+    margin-right:40px;
+}
+ul{
+    margin:0;
+    padding:0;
+}
+li{
+    width:400px;
+    height:50px;
+    list-style: none;
+    border-bottom:1px solid #000000;
+}
+.info{
+    display: none;
+    color:#ffffff;
+    font-size:15px;
+}
+#addchannelsIcon:hover .info{
+    display:block;
+}
+.channelHeader{
+    display: flex;
+    justify-content: space-between;
+    padding:0 10px 0 10px;
+    height:100%;
+    cursor:pointer;
+}
+
+.mainSection{
+    display:flex;
+    height:100vh;
+}
+.channelsContainer{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+.channelsSection{
+    border-right:1px solid black;
+}
+
+.messageSection{
+    flex-grow: 3;
+}
+
+.updatechannel{
+width:15%;
+height:20px;
+float:right;
+cursor:pointer;
+border:1px solid #cccccc;
+background-color: gray;
+color:#ffffff;
+text-align: center;
+margin-right:5px;
+}
+.channelTitle{
+flex-grow: 2;
+line-height:50px;
+}
+.messageInput{
+    width:100%;
+}
+
+.messageContainer{
+    height:429px;
+    padding:2%;
+    overflow: auto;
+}
+.messageInput{
+    height:90px;
+}
+
+.channelMessages form{
+    position: relative;
+}
+.submitMessage{
+    width: 10%;
+    right: 0%;
+    bottom: 0%;
+    height: 95px;
+    position: absolute;
+}
+.channelMessages{
+    display: flex;
+    flex-direction: column;
+}
+.hidden{
+    display:none;
+}
