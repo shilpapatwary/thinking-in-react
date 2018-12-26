@@ -183,7 +183,10 @@ color: #ffffff;
 
  #addUserForm, #addChannelForm{
     width: 20%;
-    margin-left: 5%;
+    margin: 5%;
+    padding: 8%;
+    text-align: center;
+    border: 1px solid grey;
  }
 
  #channelParentContainer .hidden{
@@ -231,4 +234,8 @@ color: #ffffff;
     padding:10px;
     cursor:pointer;
     background-color:#cccccc;
+}
+.workspaceUser{
+    line-height: 50px;
+    padding-left:11px;
 }

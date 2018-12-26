@@ -8,7 +8,8 @@
             "workspace-url":"fullstackdev.slack.com",
             "users":[{
                 "id" :"user1",
-                "name" : "Shilpa"
+                "name" : "Shilpa",
+                "chat" : false
             }],
             "channels":[
                 {

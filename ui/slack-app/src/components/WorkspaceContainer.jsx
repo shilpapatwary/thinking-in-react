@@ -32,12 +32,6 @@ constructor(props) {
                         <input type="submit" id="submitWorkspaceUser"/>
                     </form>
             </section>
-            <section className="hidden" id="addChannelForm">
-                    <form id="addChannelToWorkspace">
-                        <input type="text" id="workspaceChannel" className="channelInput" placeholder="Channel Name"/>
-                        <input type="submit" id="submitWorkspaceChannel"/>
-                    </form>
-            </section>
       </section>
     );
   }
