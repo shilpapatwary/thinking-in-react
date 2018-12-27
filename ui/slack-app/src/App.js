@@ -21,6 +21,7 @@ class App extends Component {
     this.showWorkspaces = this.showWorkspaces.bind(this);
     this.addChannelToWorkspace = this.addChannelToWorkspace.bind(this);
     this.startUserThread = this.startUserThread.bind(this);
+    this.saveMessages = this.saveMessages.bind(this);
   }
 
   showWorkspaces() {
@@ -56,6 +57,17 @@ class App extends Component {
     }
   }
 
+  saveMessages(cid, messages){
+    const workspaceIndex = data.workspaces.findIndex(w => w.id === this.state.selectedWorkspace);
+    if(workspaceIndex >= 0){
+      const channelIndex = data.workspaces[workspaceIndex].channels.findIndex(c => c.id === cid);
+      if(channelIndex >= 0) {
+        data.workspaces[workspaceIndex].channels[channelIndex].messages = messages;
+        this.setState({workspaces: data.workspaces});
+      }
+    }
+  }
+
   render() {
     return (
     <div>
@@ -63,7 +75,10 @@ class App extends Component {
         {this.state.showWorkspaces && <WorkspaceContainer workspaces={this.state.workspaces} openWorkspace={this.openWorkspace}></WorkspaceContainer>}
       </section>
       <section id="channelParentContainer">
-        {this.state.showChannels && <ChannelCointainer channels={this.state.channels} users={this.state.users} showWorkspaces={this.showWorkspaces} onAddChannel={this.addChannelToWorkspace} onUserThreadStart={this.startUserThread}></ChannelCointainer>}
+        {this.state.showChannels && <ChannelCointainer channels={this.state.channels} 
+        users={this.state.users} showWorkspaces={this.showWorkspaces} 
+        onAddChannel={this.addChannelToWorkspace} onUserThreadStart={this.startUserThread} 
+        onMessageSent={this.saveMessages}></ChannelCointainer>}
       </section>
     </div>
     );

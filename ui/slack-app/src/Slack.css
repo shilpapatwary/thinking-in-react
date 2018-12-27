@@ -86,8 +86,16 @@ color: #ffffff;
 .workspace i:hover{
     color: #00fff5;
 }
-
-
+#channelSectionContainer{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+#channelParentContainer{
+    height: 100vh;
+    display: flex;
+    flex-direction: column; 
+}
 #channelParentContainer .addchannel{
     cursor: pointer;
      font-weight: bold;
@@ -123,7 +131,7 @@ color: #ffffff;
  
  #channelParentContainer .mainSection{
      display:flex;
-     height:100vh;
+     flex:3;
  }
  #channelParentContainer .channelsContainer{
      display:flex;
@@ -158,9 +166,14 @@ color: #ffffff;
  }
  
  #channelParentContainer .messageContainer{
-     height:429px;
      padding:2%;
      overflow: auto;
+     width:100%;
+     height:76%;
+ }
+ #channelParentContainer .inputContainer{
+    width:99.6%;
+    height:19%;
  }
  #channelParentContainer .messageInput{
      height:90px;
@@ -177,8 +190,10 @@ color: #ffffff;
      position: absolute;
  }
  #channelParentContainer  .channelMessages{
-     display: flex;
-     flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:91%;
  }
 
  #addUserForm, #addChannelForm{

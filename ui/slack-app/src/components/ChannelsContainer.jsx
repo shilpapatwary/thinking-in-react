@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Channel from './Channel';
+import Messages from './Messages';
 
 class channelsContainer extends Component {
  constructor(props){
@@ -7,10 +8,11 @@ class channelsContainer extends Component {
      this.state = {
          channels: props.channels,
          users: props.users,
-         selectedChannel:{},
+         selectedChannel:props.channels[0],
          showChannelForm: false,
          showMessageSection: true,
-         showUserForm: false
+         showUserForm: false,
+         hasChannels: props.channels.length > 0
      }
      this.setSelectedChannel = this.setSelectedChannel.bind(this);
      this.addChannelToWorkspace = this.addChannelToWorkspace.bind(this);
@@ -52,7 +54,7 @@ class channelsContainer extends Component {
  }
   render() {
     return (
-        <section>
+        <section id="channelSectionContainer">
             <header>
                 <section><h3 className="backButton" onClick={this.props.showWorkspaces}><i className="fa fa-arrow-left"></i>Back To Workspaces</h3></section>
             </header>
@@ -76,9 +78,10 @@ class channelsContainer extends Component {
                     </ul> 
                 </div>
                {
-                   this.state.showMessageSection &&
+                   this.state.showMessageSection && this.state.hasChannels &&
                    <div className="messageSection" id="msgSec">
                         <h2 className='channelHeaderName'>{this.state.selectedChannel.name}</h2>
+                       <Messages channel={this.state.selectedChannel} key={this.state.selectedChannel.id} saveMessages={this.props.onMessageSent}></Messages>
                    </div>
                } 
                 

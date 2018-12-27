@@ -19,7 +19,8 @@
                     "users":[{
                         "id" :"user1",
                         "name" : "Shilpa"
-                    }]
+                    }],
+                    "messages":["hi", "hello"]
                 },
                 {
                     "id" : "gtyje786564",
@@ -28,7 +29,8 @@
                     "users":[{
                         "id" :"user1",
                         "name" : "Shilpa"
-                    }]
+                    }],
+                    "messages":[]
                 }
             ]
         },
@@ -47,7 +49,8 @@
                     "id" : "hufnr890",
                     "name" : "random",
                     "desc" : "",
-                    "users":[]
+                    "users":[],
+                    "messages":[]
                 }
             ]
         },
@@ -66,7 +69,8 @@
                     "id" : "ioferfj",
                     "name" : "random",
                     "desc" : "",
-                    "users":[]
+                    "users":[],
+                    "messages":[]
                 }
             ]
         }
