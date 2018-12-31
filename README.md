@@ -1,3 +1,18 @@
+How to Use this app:
+
+trello app:
+ - cd ui/trello-app
+ - npm install
+ - npm start
+
+Slack app:
+ - cd ui/slack-app
+ - npm install
+ - npm start
+
+
+
+
 Assignment - Week 5
 
 Submission date : 26th Dec
