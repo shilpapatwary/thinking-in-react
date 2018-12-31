@@ -9,7 +9,8 @@
             "users":[{
                 "id" :"user1",
                 "name" : "Shilpa",
-                "chat" : false
+                "chat" : false,
+                "threads":[]
             }],
             "channels":[
                 {
@@ -29,6 +30,10 @@
                     "users":[{
                         "id" :"user1",
                         "name" : "Shilpa"
+                    },
+                    {
+                        "id" :"user2",
+                        "name" : "Patwary"
                     }],
                     "messages":[]
                 }
@@ -43,6 +48,10 @@
             "users":[{
                 "id" :"user1",
                 "name" : "Shilpa"
+            },
+            {
+                "id" :"user2",
+                "name" : "Patwary"
             }],
             "channels":[
                 {

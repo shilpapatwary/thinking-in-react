@@ -31,10 +31,10 @@ header section{
     display:none;
 }
 #workspaceContainer{
-    width: 35%;
+    width: 75%;
     border: 1px solid gray;
     padding: 0;
-    margin-left: 5%;
+    margin-left: 14%;
 }
 #workspaceContainer li{
     list-style: none;
@@ -199,9 +199,19 @@ color: #ffffff;
  #addUserForm, #addChannelForm{
     width: 20%;
     margin: 5%;
-    padding: 8%;
+    height: 100px;
+    line-height: 50px;
     text-align: center;
     border: 1px solid grey;
+}
+ .close-form{
+     cursor: pointer;
+     padding:2%;
+     float:right;
+ }
+
+ #addChannelForm form, #addUserForm form {
+     clear:both;
  }
 
  #channelParentContainer .hidden{
@@ -215,10 +225,10 @@ color: #ffffff;
  .channelHeader input{
     margin: 3% 5% 3% 0;
  }
- #userListDialog {
+ .userListDialog {
     position: absolute;
-    top: 21%;
-    right: 0%;
+    top: 20%;
+    right: 2%;
     border: 2px solid black;
     padding: 1%;
     background-color: wheat;
@@ -226,7 +236,7 @@ color: #ffffff;
     height: auto;
  }
 
- #closeUserDialog{
+ .closeUserDialog{
      float:right;
      cursor: pointer;
  }

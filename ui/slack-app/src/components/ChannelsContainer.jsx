@@ -19,6 +19,7 @@ class channelsContainer extends Component {
      this.openChannelForm = this.openChannelForm.bind(this);
      this.openUserForm = this.openUserForm.bind(this);
      this.startUserThread = this.startUserThread.bind(this);
+     this.closeForm = this.closeForm.bind(this);
  }
 
  addChannelToWorkspace(event) {
@@ -52,6 +53,13 @@ class channelsContainer extends Component {
      this.setState({showChannelForm: false, showUserForm: false,
         showMessageSection: true})
  }
+
+ closeForm() {
+     this.setState({ showChannelForm: false,
+        showMessageSection: true,
+        showUserForm: false});
+ }
+
   render() {
     return (
         <section id="channelSectionContainer">
@@ -88,6 +96,7 @@ class channelsContainer extends Component {
             {
                 this.state.showChannelForm && 
                 <section id="addChannelForm">
+                    <span><i className="fa fa-window-close close-form" aria-hidden="true" onClick={this.closeForm}></i></span>
                     <form id="addChannelToWorkspace">
                         <input type="text" id="workspaceChannel" className="channelInput" placeholder="Channel Name"/>
                         <input type="submit" id="submitWorkspaceChannel" onClick={this.addChannelToWorkspace}/>
@@ -97,6 +106,7 @@ class channelsContainer extends Component {
             {
                 this.state.showUserForm && 
                 <section id="addUserForm">
+                    <span><i className="fa fa-window-close close-form" aria-hidden="true" onClick={this.closeForm}></i></span>
                     <form>
                         <input type="text" id="workspaceUsername" className="userInput" placeholder="User Name"/>
                         <input type="submit" onClick={this.startUserThread}/>
@@ -105,7 +115,7 @@ class channelsContainer extends Component {
             }
                 
             </section>
-            <section id="userListDialog" className="hidden"></section>
+            
     </section>
     );
   }

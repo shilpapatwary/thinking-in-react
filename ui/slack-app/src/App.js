@@ -22,6 +22,10 @@ class App extends Component {
     this.addChannelToWorkspace = this.addChannelToWorkspace.bind(this);
     this.startUserThread = this.startUserThread.bind(this);
     this.saveMessages = this.saveMessages.bind(this);
+    this.updateWorkspaceTitle = this.updateWorkspaceTitle.bind(this);
+    this.addWorkspace = this.addWorkspace.bind(this);
+    this.deleteWorkspace = this.deleteWorkspace.bind(this);
+    this.addUserToWorkspace = this.addUserToWorkspace.bind(this);
   }
 
   showWorkspaces() {
@@ -44,7 +48,7 @@ class App extends Component {
     if(workspaceIndex >= 0){
       data.workspaces[workspaceIndex].channels.push(channel);
       this.setState({workspaces: data.workspaces, channels:data.workspaces[workspaceIndex].channels, showWorkspaces: false,
-        showChannels: true});
+        showChannels: true, selectedChannel: channel });
     }
   }
 
@@ -68,11 +72,40 @@ class App extends Component {
     }
   }
 
+  updateWorkspaceTitle(wname) {
+    const workspaceIndex = data.workspaces.findIndex(w => w.id === this.state.selectedWorkspace);
+    if(workspaceIndex >= 0){
+      data.workspaces[workspaceIndex].name = wname;
+      this.setState({workspaces: data.workspaces});
+    }
+  }
+
+  addWorkspace(workspace){
+    data.workspaces.push(workspace);
+    this.setState({workspaces: data.workspaces});
+  }
+
+  deleteWorkspace(wid) {
+    const workspaceIndex = data.workspaces.findIndex(w => w.id === wid);
+    if(workspaceIndex >= 0){
+      data.workspaces.splice(workspaceIndex, 1);
+      this.setState({workspaces: data.workspaces});
+    }
+  }
+
+  addUserToWorkspace(wid, user) {
+    const workspaceIndex = data.workspaces.findIndex(w => w.id === wid);
+    if(workspaceIndex >= 0){
+      data.workspaces[workspaceIndex].users.push(user);
+      this.setState({workspaces: data.workspaces});
+    }
+  }
+
   render() {
     return (
     <div>
       <section id="workspaceParentContainer">
-        {this.state.showWorkspaces && <WorkspaceContainer workspaces={this.state.workspaces} openWorkspace={this.openWorkspace}></WorkspaceContainer>}
+        {this.state.showWorkspaces && <WorkspaceContainer workspaces={this.state.workspaces} onAddUserToWorkspace={this.addUserToWorkspace} deleteWorkspace={this.deleteWorkspace} onWorkspaceTitleChange={this.updateWorkspaceTitle} openWorkspace={this.openWorkspace} addWorkspace={this.addWorkspace}></WorkspaceContainer>}
       </section>
       <section id="channelParentContainer">
         {this.state.showChannels && <ChannelCointainer channels={this.state.channels} 
