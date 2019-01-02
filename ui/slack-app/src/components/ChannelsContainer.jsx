@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Channel from './Channel';
-import Messages from './Messages';
+import MessageContainer from './MessageContainer';
 
 class channelsContainer extends Component {
  constructor(props){
@@ -87,10 +87,7 @@ class channelsContainer extends Component {
                 </div>
                {
                    this.state.showMessageSection && this.state.hasChannels &&
-                   <div className="messageSection" id="msgSec">
-                        <h2 className='channelHeaderName'>{this.state.selectedChannel.name}</h2>
-                       <Messages channel={this.state.selectedChannel} key={this.state.selectedChannel.id} saveMessages={this.props.onMessageSent}></Messages>
-                   </div>
+                  <MessageContainer key={this.state.selectedChannel.id} selectedChannel={this.state.selectedChannel} saveMessages={this.props.onMessageSent}></MessageContainer>
                } 
                 
             {
