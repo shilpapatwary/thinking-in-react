@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Workspace from './Workspace';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
 class workspaceContainer extends Component {
 constructor(props) {
@@ -42,19 +45,27 @@ addUserToWorkspace(event){
   render(props) {
     return (
         <section>
-            <header>
-                        <section id="workspaceHeader"><h2>My Workspaces</h2></section>
-            </header>
+            <section id="workspaceHeader">
+                <AppBar  position="static" style= {{backgroundColor: 'inherit'}}>
+                <Typography variant="title" color="inherit" style= {{lineHeight: '50px'}}>
+                        My Workspaces
+                    </Typography>
+                </AppBar>
+            </section>
+            
             <section id="content">
                         <section id="workspaces">
-                                <ul id="workspaceContainer">
-                                    {
-                                        this.state.workspaces.map( workspace => {
-                                            return <Workspace workspace={workspace} key={workspace.id}  openWorkspace={this.props.openWorkspace} onWorkspaceTitleChange={this.props.onWorkspaceTitleChange} openAddUserForm={this.openAddUserForm} deleteWorkspace={this.props.deleteWorkspace}></Workspace>
-                                        })
-                                    }
-                                    <li id="addWorkspace" className="workspace" onClick={this.addWorkspace}>+ Add a workspace</li>
-                                </ul>
+                                <section id="workspaceContainer">
+                                    <Grid container spacing={24} style={{padding: '24px 0 24px 0'}}>
+                                        { this.state.workspaces.map(workspace => (
+                                            <Grid key={workspace.id} item xs={12} sm={12} lg={12} xl={12}>
+                                            <Workspace workspace={workspace} key={workspace.id}  openWorkspace={this.props.openWorkspace} onWorkspaceTitleChange={this.props.onWorkspaceTitleChange} openAddUserForm={this.openAddUserForm} deleteWorkspace={this.props.deleteWorkspace}></Workspace>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                    
+                                    <div id="addWorkspace" className="workspace" onClick={this.addWorkspace}>+ Add a workspace</div>
+                               </section>
                         </section>
             </section>
            {

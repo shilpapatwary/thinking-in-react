@@ -3,12 +3,14 @@ body, h2{
 }
 header {
   height:50px;
-  text-align: center;
   background-color: gray;
-  line-height:50px;
   color:#ffffff;
-  display:flex;
+  text-align:center;
   justify-content:space-between;
+  line-height:50px;
+}
+#workspaceHeader{
+    background-color: gray;
 }
 header section{
     margin-left:10px;
@@ -32,7 +34,6 @@ header section{
 }
 #workspaceContainer{
     width: 75%;
-    border: 1px solid gray;
     padding: 0;
     margin-left: 14%;
 }
@@ -45,9 +46,10 @@ header section{
 .workspace{
     display: flex;
     justify-content: space-between;
-    padding:0 10px 0 10px;
-    height:25px;
-    line-height: 25px;
+    padding: 0 10px 0 10px;
+    height: 64px;
+    line-height: 64px;
+    background-color: #3367a4;
 }
 .deleteWorkspace{
     cursor: pointer;
@@ -80,7 +82,7 @@ color: #ffffff;
 .workspace i{
     color: #5ebdd4;
     font-size:18px;
-    margin:1% 2% 0 0;
+    margin:2% 2% 0 0;
     cursor:pointer;
 }
 .workspace i:hover{
@@ -244,6 +246,7 @@ color: #ffffff;
  .backButton{
     cursor: pointer;
     margin:0;
+    padding-left:10px;
 }
 .backButton i{
     margin-right:10px;

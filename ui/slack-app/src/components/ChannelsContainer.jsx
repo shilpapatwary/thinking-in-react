@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Channel from './Channel';
 import MessageContainer from './MessageContainer';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
 
 class channelsContainer extends Component {
  constructor(props){
@@ -63,9 +65,14 @@ class channelsContainer extends Component {
   render() {
     return (
         <section id="channelSectionContainer">
-            <header>
-                <section><h3 className="backButton" onClick={this.props.showWorkspaces}><i className="fa fa-arrow-left"></i>Back To Workspaces</h3></section>
-            </header>
+            <section id="workspaceHeader">
+                <AppBar  position="static" style= {{backgroundColor: 'inherit', textAlign:'left'}}>
+                <Typography className="backButton" variant="title" color="inherit" style= {{lineHeight: '50px'}} onClick={this.props.showWorkspaces}>
+                <i className="fa fa-arrow-left"></i> Back To Workspaces
+                    </Typography>
+                </AppBar>
+            </section>
+            
             <section className="mainSection">
                 <div className="channelsSection">
                     <div className="channelHeaderSection"><span >Channels </span><i className="fa fa-plus-square addChannel" onClick={this.openChannelForm}></i></div>
