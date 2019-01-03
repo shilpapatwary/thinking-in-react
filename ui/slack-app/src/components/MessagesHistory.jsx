@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import SendMessage from './SendMessage';
+import Message from './Message';
 
-class Messages extends Component {
+class MessagesHistory extends Component {
 constructor(props){
     super(props);
     this.state = {
@@ -25,7 +26,7 @@ submitMessage(message) {
             {
                 
                   this.state.messages.map( (message, index) => {
-                    return <div key={index}>{message}</div>
+                    return <Message key={index} message={message}></Message>
                     })
                     
             }
@@ -36,4 +37,4 @@ submitMessage(message) {
   }
 }
 
-export default Messages;
+export default MessagesHistory;

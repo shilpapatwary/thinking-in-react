@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Messages from './Messages';
+import MessagesHistory from './MessagesHistory';
 
 class MessageContainer extends Component {
  constructor(props){
@@ -13,7 +13,7 @@ class MessageContainer extends Component {
     return (
     <div className="messageSection" id="msgSec">
         <h2 className='channelHeaderName'>{this.state.selectedChannel.name}</h2>
-        <Messages channel={this.state.selectedChannel} key={this.state.selectedChannel.id} saveMessages={this.props.saveMessages}></Messages>
+        <MessagesHistory channel={this.state.selectedChannel} key={this.state.selectedChannel.id} saveMessages={this.props.saveMessages}></MessagesHistory>
      </div>
     );
   }
